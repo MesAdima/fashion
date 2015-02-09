@@ -102,6 +102,24 @@ class Admin_model extends MY_Model {
     return $companies;
   }
 
+  public function get_all_messages()
+  {
+    $messages = array();
+    $query = $this->db->get_where('mail', array('is_deleted' => 0));
+    $result = $query->result_array();
+
+    if ($result) {
+      foreach ($result as $key => $value) {
+        $messages[$value['mail_id']] = $value;
+      }
+      //echo '<pre>';print_r($messages);echo '</pre>';die();
+      return $messages;
+
+    }
+    
+    return $messages;
+  }
+
   public function updateuser($type, $ac_id)
   {
     $data = array();
@@ -148,7 +166,35 @@ class Admin_model extends MY_Model {
         break;
     }
     $this->db->where('prod_id', $prod_id);
-    $update = $this->db->update('productss', $data);
+    $update = $this->db->update('products', $data);
+
+    if ($update) {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public function updatemessage($type, $mail_id)
+  {
+    $data = array();
+    switch ($type) {
+      case 'delete':
+        $data['is_deleted'] = 1; 
+        
+        break;
+      
+      case 'update':
+        $data = $this->input->post();
+        break;
+      default:
+        # code...
+        break;
+    }
+    $this->db->where('mail_id', $mail_id);
+    $update = $this->db->update('mail', $data);
 
     if ($update) {
       return true;

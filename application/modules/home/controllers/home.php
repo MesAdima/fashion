@@ -6,6 +6,9 @@ class Home extends MY_Controller {
 
 	function __construct()
     {
+
+        $this->load->model('m_home');
+
         parent::__construct();
 
         if ($this->session->userdata('logged_in')) {
@@ -18,11 +21,13 @@ class Home extends MY_Controller {
 
 	public function index()
 	{
-		 // $details = $this->session->all_userdata();
-   //       echo "<pre>";print_r($details);die();
+		$data['shirts'] = $this->getshirts();
+		$data['suits'] = $this->getsuits();
+		$data['skirts'] = $this->getskirts();
+		$data['accessories'] = $this->getaccessories();
 
 		$this->load->view('header', array('logged_in' => $this->logged_in));
-		$this->load->view('v_home');
+		$this->load->view('v_home',$data);
 		$this->load->view('home_footer');
 	}
 
@@ -40,7 +45,8 @@ class Home extends MY_Controller {
 		$this->load->view('footer');
 	}
 
-	 public function add_to_cart_check(){
+	 public function add_to_cart_check()
+	 {
       if($this->session->userdata('logged_in')){
 			redirect('cart/add_products');
       }
@@ -49,6 +55,80 @@ class Home extends MY_Controller {
 
       }
     }
+
+    function getshirts()
+	{
+		$shirts = array();
+       $results = $this->m_home->get_shirts();
+
+       foreach ($results as $key => $values) {
+       	 
+       	 	
+           $shirts['shirts'][] = $values;
+         
+       }
+
+       // echo '<pre>';print_r($proddet);echo '</pre>';die;
+
+        return $shirts;
+	}
+
+	function getskirts()
+	{
+		$skirts = array();
+       $results = $this->m_home->get_skirts();
+
+       foreach ($results as $key => $values) {
+       	 
+       	 	
+           $skirts['skirts'][] = $values;
+         
+       }
+
+       // echo '<pre>';print_r($proddet);echo '</pre>';die;
+
+        return $skirts;
+	}
+
+	function getsuits()
+	{
+		$suits = array();
+       $results = $this->m_home->get_suits();
+
+       foreach ($results as $key => $values) {
+       	 
+       	 	
+           $suits['suits'][] = $values;
+         
+       }
+
+       // echo '<pre>';print_r($proddet);echo '</pre>';die;
+
+        return $suits;
+	}
+
+	function getaccessories()
+	{
+		$accessories = array();
+       $results = $this->m_home->get_accessories();
+
+       foreach ($results as $key => $values) {
+       	 
+       	 	
+           $accessories['accessories'][] = $values;
+         
+       }
+
+       // echo '<pre>';print_r($proddet);echo '</pre>';die;
+
+        return $accessories;
+	}
+
+
+
+
+
+
 	
 }
 

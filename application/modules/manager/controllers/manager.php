@@ -153,6 +153,23 @@ class Manager extends MY_Controller {
         return $typ_style;
     }
 
+    function updatetype($type, $type_id)
+  {
+    $update = $this->admin_model->updatetype($type, $type_id);
+    if($update)
+    {
+      switch ($type) {
+        case 'delete':
+          redirect(base_url() .'manager/home');
+          break;
+        
+        default:
+          # code...
+          break;
+      }
+    }
+  }
+
 
 
 

@@ -9,24 +9,26 @@
         <link rel="icon" type="image/x-icon" href="<?php echo base_url() . 'assets/fonts/fashion.ico'?>" />
         <link type="text/css" href="<?php echo base_url() .'assets/ionicons/css/ionicons.css' ?>" rel="stylesheet" media="screen">
         <link type="text/css" href="<?php echo base_url() .'assets/dist/css/table_bootstrap.css' ?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/bootstrap/css/bootstrap-responsive.min.css'?>" rel="stylesheet" media="screen">
         <link type="text/css" href="<?php echo base_url() .'assets/vendors/easypiechart/jquery.easy-pie-chart.css'?>" rel="stylesheet" media="screen">
-        <link type="text/css" href="<?php echo base_url() .'assets/css/ad_styles.css' ?>" rel="stylesheet" media="screen">
         <link type="text/css" href="<?php echo base_url() .'assets/script/jquery/jquery-ui.css' ?>" rel="stylesheet" media="screen">
         
-        <link type="text/css" href="<?php echo base_url() .'assets/dist/css/table_bootstrap.css' ?>" rel="stylesheet" media="screen">
+        
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
        <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'; ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'assets/script/jquery/jquery-ui.js'; ?>"></script>
 
         <script src="<?php echo base_url(). 'assets/vendors/modernizr-2.6.2-respond-1.1.0.min.js'?>"></script>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/css/datatables.css'; ?>" /> 
+          <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/css/datatables.css'; ?>" /> 
         
         <link type="text/css" href="<?php echo base_url() .'assets/bootstrap/css/bootstrap.css' ?>" rel="stylesheet">
 
         <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/jquery.datatables.min.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/js/datatables.js'; ?>"></script>
+        <link type="text/css" href="<?php echo base_url() .'assets/css/ad_styles.css' ?>" rel="stylesheet" media="screen">
     </head>
     
     <body>
@@ -155,9 +157,9 @@
                         <li>
                             <a href="<?php echo base_url(). 'admin/forms'?>"><span class="badge badge-alert pull-right"><?php echo $productnumber?></span> Product Form</a>
                         </li>
-                        <li>
+                       <!--  <li>
                             <a href="<?php echo base_url(). 'admin/statistics'?>"><i class="icon-chevron-right"></i> Statistics (Charts)</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?php echo base_url(). 'admin/messages'?>"><span class="badge badge-warning pull-right"><?php echo $messagenumber?></span> Messages</a>
                         </li>
@@ -244,7 +246,7 @@
                     <!-- /stats -->
 
 
-                    <div class="row-fluid addlength">
+                   <div class="row-fluid addlength">
                         <div class="span12">
                             <!-- block -->
                             <div class="block">
@@ -286,6 +288,12 @@
 
                     </div>
 
+
+                    
+
+
+
+
                      <div class="row-fluid addlength">
                         <div class="span12">
                             <!-- block -->
@@ -310,7 +318,7 @@
                                                 <th>Email</th>
                                                 <th>Date / Time Registered</th>
                                                 <th>View</th>
-                                                <th>Delete</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -466,11 +474,11 @@
         </div>
 
 
-        <script src="<?php echo base_url(). 'assets/vendors/jquery-1.9.1.min.js'?>"></script>
-        <script src="<?php echo base_url(). 'assets/bootstrap/js/bootstrap.min.js'?>"></script>
+        <script src="<?php echo base_url(). 'assets/bootstrap/js/bootstrap.js'?>"></script>
         <script src="<?php echo base_url(). 'assets/vendors/easypiechart/jquery.easy-pie-chart.js'?>"></script>
         <script src="<?php echo base_url(). 'assets/js/ad_scripts.js'?>"></script>
         
+        <!--<script src="<?php echo base_url(). 'assets/js/jquery-2.1.1.min.js'?>"></script>-->
         <script>
         $(function() {
             

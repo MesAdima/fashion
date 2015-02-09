@@ -142,6 +142,94 @@ class M_manager extends MY_Model {
     return $categories;
   }
 
+
+  public function updatetype($type, $type_id)
+  {
+    $data = array();
+    switch ($type) {
+      case 'delete':
+        $data['status'] = 0; 
+        
+        break;
+      
+      case 'update':
+        $data = $this->input->post();
+        break;
+      default:
+        # code...
+        break;
+    }
+    $this->db->where('type_id', $type_id);
+    $update = $this->db->update('type', $data);
+
+    if ($update) {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
+  public function updatecategory($type, $cat_id)
+  {
+    $data = array();
+    switch ($type) {
+      case 'delete':
+        $data['status'] = 0; 
+        
+        break;
+      
+      case 'update':
+        $data = $this->input->post();
+        break;
+      default:
+        # code...
+        break;
+    }
+    $this->db->where('cat_id', $cat_id);
+    $update = $this->db->update('category', $data);
+
+    if ($update) {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public function updatecompany($type, $comp_id)
+  {
+    $data = array();
+    switch ($type) {
+      case 'delete':
+        $data['status'] = 0; 
+        
+        break;
+      
+      case 'update':
+        $data = $this->input->post();
+        break;
+      default:
+        # code...
+        break;
+    }
+    $this->db->where('comp_id', $cat_id);
+    $update = $this->db->update('company', $data);
+
+    if ($update) {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
+
   public function enter_category(){
       $categoryname = strtoupper($this->input->post('catname'));
       

@@ -188,8 +188,52 @@
 				</div>
 				
 				<!--implementing from the db-->
+
+				<!-- <div id="products">
+					<ul>
+						<?php foreach ($products as $product): ?>
+							<li>
+								<?php echo form_open ('cart/add_products'); ?>
+								<div class="name"> <?php echo $product->prod_name; ?> </div>
+								<div class="image">
+									<?php echo img(array(
+										'src'=> '/uploads/products'. $product->picture,
+										'class'=> 'thumb',
+										'alt'=> $product->prod_name
+									)
+									);?>
+								</div>
+								<div class="price">Kshs<?php echo $product->price; ?></div>
+								<div class="option">
+									
+									<?php if ($product->option_values):?>
+										<?php echo form_label (''); ?>
+									<?php endif; ?>	
+								</div>
+								<?php echo form_close ($product->option_values, 'option_'.$product->prod_id); ?>
+								<?php echo form_dropdown(
+									$product->option_values, 
+									$product->option_values,
+									NULL, 
+									'id="option_'.$product->prod_id.'"'
+								); ?>
+							</li>
+						 
+						<?php endforeach; ?>
+					</ul>
+					
+				</div>
+
+				
+<<<<<<< HEAD
+=======
+				<div id="cart">
+					
+					
+				</div> -->
 				
 				
+>>>>>>> 817f19021d30d1a4471f4193d6e848bdb3c64760
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>

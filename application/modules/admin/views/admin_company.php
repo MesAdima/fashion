@@ -2,22 +2,32 @@
 <html>
     
     <head>
-      <title>Tables</title>
+      <title>Admin:Company</title>
         <meta name="robots" content="noindex">
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="<?php echo base_url() . 'assets/fonts/fashion.ico'?>" />
-       
-        <link href="<?php echo base_url(). 'assets/dist/css/bootstrap.min-1.css'?>" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url(). 'assets/dist/css/bootstrap-responsive.min-1.css'?>" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url(). 'assets/css/ad_styles.css'?>" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url(). 'assets/dist/css/table_bootstrap.css'?>" rel="stylesheet" media="screen">
-         <link type="text/css" href="<?php echo base_url() .'assets/ionicons/css/ionicons.css' ?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/ionicons/css/ionicons.css' ?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/dist/css/table_bootstrap.css' ?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/bootstrap/css/bootstrap-responsive.min.css'?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/vendors/easypiechart/jquery.easy-pie-chart.css'?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/script/jquery/jquery-ui.css' ?>" rel="stylesheet" media="screen">
         
-           <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
+        
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+       <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'; ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'assets/script/jquery/jquery-ui.js'; ?>"></script>
+
+        <script src="<?php echo base_url(). 'assets/vendors/modernizr-2.6.2-respond-1.1.0.min.js'?>"></script>
+          <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/css/datatables.css'; ?>" /> 
+        
+        <link type="text/css" href="<?php echo base_url() .'assets/bootstrap/css/bootstrap.css' ?>" rel="stylesheet">
+
+        <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/jquery.datatables.min.js'; ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/js/datatables.js'; ?>"></script>
+        <link type="text/css" href="<?php echo base_url() .'assets/css/ad_styles.css' ?>" rel="stylesheet" media="screen">
     </head>
     
     <body>
@@ -119,9 +129,9 @@
                         <li>
                             <a href="<?php echo base_url(). 'admin/forms'?>"><span class="badge badge-alert pull-right"><?php echo $productnumber?></span> Product Form</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?php echo base_url(). 'admin/statistics'?>"><i class="icon-chevron-right"></i> Statistics (Charts)</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?php echo base_url(). 'admin/messages'?>"><span class="badge badge-warning pull-right"><?php echo $messagenumber?></span> Messages</a>
                         </li>
@@ -131,33 +141,7 @@
                         <li>
                             <a href="<?php echo base_url(). 'admin/users'?>"><span class="badge badge-success pull-right"><?php echo $usernumber?></span> Users</a>
                         </li>
-                        <!-- <li>
-                            <a href="calendar.html"><i class="icon-chevron-right"></i> Calendar</a>
-                        </li>
-                        <li>
-                            <a href="buttons.html"><i class="icon-chevron-right"></i> Buttons & Icons</a>
-                        </li>
-                        <li>
-                            <a href="editors.html"><i class="icon-chevron-right"></i> WYSIWYG Editors</a>
-                        </li>
-                        <li>
-                            <a href="interface.html"><i class="icon-chevron-right"></i> UI & Interface</a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="badge badge-success pull-right">731</span> Orders</a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="badge badge-success pull-right">812</span> Invoices</a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="badge badge-info pull-right">11</span> Reports</a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="badge badge-important pull-right">83</span> Errors</a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="badge badge-warning pull-right">4,231</span> Logs</a>
-                        </li> -->
+                        
                     </ul>
                 </div>
                 
@@ -171,16 +155,19 @@
 
 
                     <div class="row-fluid addlength">
-                        <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">Companies</div>
-                            </div>
-                            <div class="block-content collapse in">
-                                <div class="span12">
-                                    
-                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+                        <div class="span12">
+                            <!-- block -->
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">Companies</div>
+                                    <div class="pull-right"><span class="badge badge-info"><?php echo $companynumber?></span>
+
+                                    </div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table table-striped datatable" id="acompanytable">
                                         <thead>
+
 
                                             <tr>
                                                 <th>#</th>
@@ -190,7 +177,8 @@
                                                 <th>Phone Number</th>
                                                 <th>Email</th>
                                                 <th>Date / Time Registered</th>
-                                                <th colspan="2">Actions</th>
+                                                <th>View</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -199,8 +187,9 @@
                                     </table>
                                 </div>
                             </div>
+                            <!-- /block -->
                         </div>
-                        <!-- /block -->
+
                     </div>
 
                    
@@ -225,17 +214,29 @@
         </div>
         <!--/.fluid-container-->
 
-        <script src="<?php echo base_url(). 'assets/vendors/jquery-1.9.1.js'?>"></script>
-        <script src="<?php echo base_url(). 'assets/dist/js/bootstrap.min.js'?>"></script>
-        <script src="<?php echo base_url(). 'assets/vendors/datatables/js/jquery.dataTables.min.js'?>"></script>
-
-
+        <script src="<?php echo base_url(). 'assets/bootstrap/js/bootstrap.js'?>"></script>
+        <script src="<?php echo base_url(). 'assets/vendors/easypiechart/jquery.easy-pie-chart.js'?>"></script>
         <script src="<?php echo base_url(). 'assets/js/ad_scripts.js'?>"></script>
-        <script src="<?php echo base_url(). 'assets/dist/js/table_bootstrap.js'?>"></script>
+        
+        <!--<script src="<?php echo base_url(). 'assets/js/jquery-2.1.1.min.js'?>"></script>-->
         <script>
         $(function() {
             
         });
+        </script>
+        <script>
+        $(function() {
+            // Easy pie charts
+            $('.chart').easyPieChart({animate: 1000});
+        });
+        </script>
+        <script type="text/javascript">
+            
+            $('#acompanytable').dataTable();
+            
+
+            $('.dataTables_filter input').addClass('form-control').attr('placeholder','Search');
+            $('.dataTables_length select').addClass('form-control');
         </script>
     </body>
 

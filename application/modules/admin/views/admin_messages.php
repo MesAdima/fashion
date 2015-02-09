@@ -2,7 +2,7 @@
 <html>
     
     <head>
-      <title>Tables</title>
+      <title>Admin:Company</title>
         <meta name="robots" content="noindex">
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="<?php echo base_url() . 'assets/fonts/fashion.ico'?>" />
@@ -141,134 +141,19 @@
                         <li>
                             <a href="<?php echo base_url(). 'admin/users'?>"><span class="badge badge-success pull-right"><?php echo $usernumber?></span> Users</a>
                         </li>
-                       
+                        
                     </ul>
                 </div>
                 
                 <!--/span-->
-                <div class="span9">
-                <div class="row-fluid addlength">
-                        <div class="span12">
-                            <!-- block -->
-                            <div class="block">
-                                <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Companies</div>
-                                    <div class="pull-right"><span class="badge badge-info"><?php echo $companynumber?></span>
-
-                                    </div>
-                                </div>
-                                <div class="block-content collapse in">
-                                    <table class="table table-striped datatable" id="acompanytable">
-                                        <thead>
-
-
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Company Name</th>
-                                                <th>Location</th>
-                                                <th>Address</th>
-                                                <th>Phone Number</th>
-                                                <th>Email</th>
-                                                <th>Date / Time Registered</th>
-                                                <th>View</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php echo $companies_table; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- /block -->
-                        </div>
-
-                    </div>
-
-                      
-
-                    <div class="row-fluid addlength">
-                        <div class="span12">
-                            <!-- block -->
-                            <div class="block">
-                                <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Users</div>
-                                    <div class="pull-right"><span class="badge badge-info"><?php echo $usernumber?></span>
-
-                                    </div>
-                                </div>
-                                <div class="block-content collapse in">
-                                    <table class="table table-striped datatable" id="ausertable">
-                                        <thead>
-
-
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Age</th>
-                                                <th>Nationality</th>
-                                                <th>Phone Number</th>
-                                                <th>Email</th>
-                                                <th>Residence</th>
-                                                <th>Religion</th>
-                                                <th>Gender</th>
-                                                <th>View</th>
-                                                <th>Delete</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php echo $users_table; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- /block -->
-                        </div>
-
-                    </div>
-
-                    <div class="row-fluid addlength">
-                        <div class="span12">
-                            <!-- block -->
-                            <div class="block">
-                                <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Products</div>
-                                    <div class="pull-right"><span class="badge badge-info"><?php echo $productnumber?></span>
-
-                                    </div>
-                                </div>
-                                <div class="block-content collapse in">
-                                    <table class="table table-striped datatable" id="aproducttable">
-                                        <thead>
-
-
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Product Name</th>
-                                                <th>Product Type</th>
-                                                <th>Product Category</th>
-                                                <th>Quantity</th>
-                                                <th>Price (Kshs)</th>
-                                                <th>Product Company</th>
-                                                <th>Date / Time Added</th>
-                                                <th>View</th>
-                                                <th>Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php echo $product_table; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- /block -->
-                        </div>
-
-                    </div>
-
+                <div class="span9" id="content">
+                  
                     
+                   
+
+
+
+
                     <div class="row-fluid addlength">
                         <div class="span12">
                             <!-- block -->
@@ -303,6 +188,11 @@
                         </div>
 
                     </div>
+
+                   
+
+                    
+
                     
 
                     
@@ -338,10 +228,9 @@
         });
         </script>
         <script type="text/javascript">
-            $('#ausertable').dataTable();
-            $('#acompanytable').dataTable();
+            
             $('#amessagetable').dataTable();
-            $('#aproducttable').dataTable();
+            
 
             $('.dataTables_filter input').addClass('form-control').attr('placeholder','Search');
             $('.dataTables_length select').addClass('form-control');

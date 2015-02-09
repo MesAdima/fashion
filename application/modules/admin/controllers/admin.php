@@ -83,7 +83,7 @@ class Admin extends MY_Controller {
                     $company_style .= '<td>'.$company_details['date_registered'].'</td>';
                     
                     $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/companyprofile/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
-                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'admin/updatecompany/delete/'.$company_details['comp_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    
                     $company_style .= '</tr>';
                     $counter++;
                 }
@@ -96,6 +96,39 @@ class Admin extends MY_Controller {
         }
 
         return $company_style;
+    }
+
+    function createmessagesview($type)
+    {
+        $messages = $this->admin_model->get_all_messages();
+        $message_style = '';
+        if ($messages) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($messages as $key => $message_details) {
+                    $message_style .= '<tr>';
+                    // $user_style .= '<td>'.$counter.'</td>';
+                    $message_style .= '<td>'.$message_details['mail_id'].'</td>';
+                    $message_style .= '<td>'.$message_details['subject'].'</td>';
+                    $message_style .= '<td>'.$message_details['message'].'</td>';
+                    $message_style .= '<td>'.$message_details['date_sent'].'</td>';
+
+                    $message_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'admin/updatemessage/delete/'.$message_details['mail_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    
+                    
+                    $message_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+            }
+        }
+
+        return $message_style;
     }
 
     function createproductsview($type)
@@ -207,9 +240,11 @@ class Admin extends MY_Controller {
 		}
 	}
 
-	function updatecompany($type, $comp_id)
+	
+
+	function updateproduct($type, $prod_id)
 	{
-		$update = $this->admin_model->updatecompany($type, $comp_id);
+		$update = $this->admin_model->updateproduct($type, $prod_id);
 		if($update)
 		{
 			switch ($type) {
@@ -217,10 +252,6 @@ class Admin extends MY_Controller {
 					redirect(base_url() .'admin/home');
 					break;
 				
-				case 'delete':
-					redirect(base_url() .'admin/home');
-					break;
-
 				default:
 					# code...
 					break;
@@ -228,9 +259,9 @@ class Admin extends MY_Controller {
 		}
 	}
 
-	function updateproduct($type, $prod_id)
+	function updatemessage($type, $mail_id)
 	{
-		$update = $this->admin_model->updateproduct($type, $prod_id);
+		$update = $this->admin_model->updatemessage($type, $mail_id);
 		if($update)
 		{
 			switch ($type) {
@@ -310,7 +341,10 @@ class Admin extends MY_Controller {
 		$data['companynumber']  = $this->getcompanynumber();
 		$data['users_table'] = $this->createusersview('table');
 		$data['product_table'] = $this->createproductsview('table');
+		$data['messages_table'] = $this->createmessagesview('table');
 		$data['companies_table'] = $this->createcompaniesview('table');
+
+
 		
 
 		$this->load->view('admin_tables', $data);

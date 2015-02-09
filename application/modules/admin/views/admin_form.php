@@ -2,20 +2,32 @@
 <html>
     
     <head>
-      <title>Forms</title>
+      <title>Admin:Products</title>
         <meta name="robots" content="noindex">
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="<?php echo base_url() . 'assets/fonts/fashion.ico'?>" />
         <link type="text/css" href="<?php echo base_url() .'assets/ionicons/css/ionicons.css' ?>" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url() .'assets/dist/css/bootstrap.min-1.css'?>" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url() .'assets/dist/css/bootstrap-responsive.min-1.css'?>" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url() .'assets/css/ad_styles.css'?>" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
+        <link type="text/css" href="<?php echo base_url() .'assets/dist/css/table_bootstrap.css' ?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/bootstrap/css/bootstrap-responsive.min.css'?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/vendors/easypiechart/jquery.easy-pie-chart.css'?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/script/jquery/jquery-ui.css' ?>" rel="stylesheet" media="screen">
+        
+        
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="<?php echo base_url() .'assets/vendors/modernizr-2.6.2-respond-1.1.0.min.js'?>"></script>
+       <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'; ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'assets/script/jquery/jquery-ui.js'; ?>"></script>
+
+        <script src="<?php echo base_url(). 'assets/vendors/modernizr-2.6.2-respond-1.1.0.min.js'?>"></script>
+          <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/css/datatables.css'; ?>" /> 
+        
+        <link type="text/css" href="<?php echo base_url() .'assets/bootstrap/css/bootstrap.css' ?>" rel="stylesheet">
+
+        <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/jquery.datatables.min.js'; ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/js/datatables.js'; ?>"></script>
+        <link type="text/css" href="<?php echo base_url() .'assets/css/ad_styles.css' ?>" rel="stylesheet" media="screen">
     </head>
     
     <body>
@@ -117,9 +129,9 @@
                         <li>
                             <a href="<?php echo base_url(). 'admin/forms'?>"><span class="badge badge-alert pull-right"><?php echo $productnumber?></span> Product Form</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?php echo base_url(). 'admin/statistics'?>"><i class="icon-chevron-right"></i> Statistics (Charts)</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?php echo base_url(). 'admin/messages'?>"><span class="badge badge-warning pull-right"><?php echo $messagenumber?></span> Messages</a>
                         </li>
@@ -247,12 +259,12 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Products</div>
-                                    <div class="pull-right"><span class="badge badge-info"><?php echo $productnumber?></span></div>
+                                    <div class="pull-right"><span class="badge badge-info"><?php echo $productnumber?></span>
 
-                                    
+                                    </div>
                                 </div>
                                 <div class="block-content collapse in">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped datatable" id="aproducttable">
                                         <thead>
 
 
@@ -265,8 +277,8 @@
                                                 <th>Price (Kshs)</th>
                                                 <th>Product Company</th>
                                                 <th>Date / Time Added</th>
-                                                <th colspan="2">Actions</th>
-                                                
+                                                <th>View</th>
+                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -292,60 +304,29 @@
             </footer>
         </div>
         <!--/.fluid-container-->
-        <link href="<?php echo base_url() .'assets/vendors/datepicker.css'?>" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url() .'assets/vendors/uniform.default.css'?>" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url() .'assets/vendors/chosen.min.css'?>" rel="stylesheet" media="screen">
-
-        <link href="<?php echo base_url() .'assets/vendors/wysiwyg/bootstrap-wysihtml5.css'?>" rel="stylesheet" media="screen">
-
-        <script src="<?php echo base_url() .'assets/vendors/jquery-1.9.1.js'?>"></script>
-        <script src="<?php echo base_url() .'assets/dist/js/bootstrap.min.js'?>"></script>
-        <script src="<?php echo base_url() .'assets/vendors/jquery.uniform.min.js'?>"></script>
-        <script src="<?php echo base_url() .'assets/vendors/chosen.jquery.min.js'?>"></script>
-        <script src="<?php echo base_url() .'assets/vendors/bootstrap-datepicker.js'?>"></script>
-
-        <script src="<?php echo base_url() .'assets/vendors/wysiwyg/wysihtml5-0.3.0.js'?>"></script>
-        <script src="<?php echo base_url() .'assets/vendors/wysiwyg/bootstrap-wysihtml5.js'?>"></script>
-
-        <script src="<?php echo base_url() .'assets/vendors/wizard/jquery.bootstrap.wizard.min.js'?>"></script>
-
-	<script type="text/javascript" src="<?php echo base_url() .'assets/vendors/jquery-validation/dist/jquery.validate.min.js'?>"></script>
-	<script src="<?php echo base_url() .'assets/js/form-validation.js'?>"></script>
+        <script src="<?php echo base_url(). 'assets/bootstrap/js/bootstrap.js'?>"></script>
+        <script src="<?php echo base_url(). 'assets/vendors/easypiechart/jquery.easy-pie-chart.js'?>"></script>
+        <script src="<?php echo base_url(). 'assets/js/ad_scripts.js'?>"></script>
         
-	<script src="<?php echo base_url() .'assets/js/ad_scripts.js'?>"></script>
+        <!--<script src="<?php echo base_url(). 'assets/js/jquery-2.1.1.min.js'?>"></script>-->
         <script>
-
-	jQuery(document).ready(function() {   
-	   FormValidation.init();
-	});
-	
-
         $(function() {
-            $(".datepicker").datepicker();
-            $(".uniform_on").uniform();
-            $(".chzn-select").chosen();
-            $('.textarea').wysihtml5();
-
-            $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index+1;
-                var $percent = ($current/$total) * 100;
-                $('#rootwizard').find('.bar').css({width:$percent+'%'});
-                // If it's the last tab then hide the last button and show the finish instead
-                if($current >= $total) {
-                    $('#rootwizard').find('.pager .next').hide();
-                    $('#rootwizard').find('.pager .finish').show();
-                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
-                } else {
-                    $('#rootwizard').find('.pager .next').show();
-                    $('#rootwizard').find('.pager .finish').hide();
-                }
-            }});
-            $('#rootwizard .finish').click(function() {
-                alert('Finished!, Starting over!');
-                $('#rootwizard').find("a[href*='tab1']").trigger('click');
-            });
+            
         });
+        </script>
+        <script>
+        $(function() {
+            // Easy pie charts
+            $('.chart').easyPieChart({animate: 1000});
+        });
+        </script>
+        <script type="text/javascript">
+            $('#aproducttable').dataTable();
+            $('#acompanytable').dataTable();
+            $('#ausertable').dataTable();
+
+            $('.dataTables_filter input').addClass('form-control').attr('placeholder','Search');
+            $('.dataTables_length select').addClass('form-control');
         </script>
     </body>
 

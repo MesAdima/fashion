@@ -21,7 +21,7 @@
       <img src="<?php echo base_url() . 'assets/images/girl2.jpg'?>" alt="...">
     </div>
     <div class="item carou_img">
-      <img src="<?php echo base_url() . 'assets/images/girl8.jpg'?>" alt="...">
+      <img src="<?php echo base_url() . 'assets/images/girl4.jpg'?>" alt="...">
     </div>
    
   </div>
@@ -56,18 +56,27 @@
          <li role="presentation"><a href="#tshirt" data-toggle="tab">T-Shirts</a></li>
          <li role="presentation"><a href="#suits" data-toggle="tab">Suits</a></li>
          <li role="presentation"><a href="#skirts" data-toggle="tab">Skirts</a></li>
-         <li role="presentation"><a href="#sunglasses" data-toggle="tab">SunGlasses</a></li>
+         <li role="presentation"><a href="#accessories" data-toggle="tab">Accessories</a></li>
       </ul>
 
       <div class="tab-content">
               <div class="tab-pane fade active in" id="tshirt" >
+                <!-- Shirts -->
+
+                <?php foreach ($shirts as $key => $value) {
+                         foreach ($value as $q => $data) {
+                          
+                          //echo '<pre>';print_r($value);echo'</pre>';die();
+                          for ($i=0; $i <= $key ; $i++) { 
+                            
+                          ?>
                 <div class="col-sm-3 imghome">
                   <div class="product-wrap">
                     <div class="single-products">
                       <div class=" text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/shirt1.jpg'?>" alt="" />
-                        <h2>Kshs 119/=</h2>
-                        <p>Red Edition</p>
+                        <img class="imagesize" src="<?php echo $data['picture']; ?>" alt="" />
+                        <h2>Kshs <?php echo $data['price']; ?></h2>
+                        <p><?php echo $data['prod_name']; ?></p>
 
                         <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
                       </div>
@@ -75,210 +84,120 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class=" text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/shirt2.jpg'?>" alt="" />
-                        <h2>Kshs 249/=</h2>
-                        <p>Grey Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class=" text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/shirt3.jpg'?>" alt="" />
-                        <h2>Kshs 199/=</h2>
-                        <p>White Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class=" text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/shirt4.jpg'?>" alt="" />
-                        <h2>Kshs 99/=</h2>
-                        <p>Black Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
+                
+                <?php 
+                             }
+                         }
+                        
+                      } 
+            ?>
+
+                <!-- /Shirts -->
               </div>
               
               <div class="tab-pane fade" id="suits" >
+               <!-- Suits -->
+
+                <?php foreach ($suits as $key => $value) {
+                         foreach ($value as $q => $data) {
+                          
+                          //echo '<pre>';print_r($value);echo'</pre>';die();
+                          for ($i=0; $i <= $key ; $i++) { 
+                            
+                          ?>
                 <div class="col-sm-3 imghome">
                   <div class="product-wrap">
                     <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/suit1.jpg'?>" alt="" />
-                        <h2>Kshs 4999/=</h2>
-                        <p>White Edition</p>
+                      <div class=" text-center">
+                        <img class="imagesize" src="<?php echo $data['picture']; ?>" alt="" />
+                        <h2>Kshs <?php echo $data['price']; ?></h2>
+                        <p><?php echo $data['prod_name']; ?></p>
+
                         <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
                       </div>
                       
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/suit2.jpg'?>" alt="" />
-                        <h2>Kshs 5499/=</h2>
-                        <p>Black Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/suit3.jpg'?>" alt="" />
-                        <h2>Kshs 2999/=</h2>
-                        <p>Grey Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/suit4.jpg'?>" alt="" />
-                        <h2>Kshs 2499/=</h2>
-                        <p>Black Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
+                
+                <?php 
+                             }
+                         }
+                        
+                      } 
+            ?>
+
+                <!-- /Suits -->
               </div>
               
-              <div class="tab-pane fade" id="sunglasses" >
+              <div class="tab-pane fade" id="accessories" >
+                <!-- Accessories -->
+
+                <?php foreach ($accessories as $key => $value) {
+                         foreach ($value as $q => $data) {
+                          
+                          //echo '<pre>';print_r($value);echo'</pre>';die();
+                          for ($i=0; $i <= $key ; $i++) { 
+                            
+                          ?>
                 <div class="col-sm-3 imghome">
                   <div class="product-wrap">
                     <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/sun1.jpg'?>" alt="" />
-                        <h2>Kshs 99/=</h2>
-                        <p>White Edition</p>
+                      <div class=" text-center">
+                        <img class="imagesize" src="<?php echo $data['picture']; ?>" alt="" />
+                        <h2>Kshs <?php echo $data['price']; ?></h2>
+                        <p><?php echo $data['prod_name']; ?></p>
+
                         <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
                       </div>
                       
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/sun5.jpg'?>" alt="" />
-                        <h2>Kshs 189/=</h2>
-                        <p>Black Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/sun3.jpg'?>" alt="" />
-                        <h2>Kshs 159/=</h2>
-                        <p>Black Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/sun4.jpg'?>" alt="" />
-                        <h2>Kshs 249/=</h2>
-                        <p>Black Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
+                
+                <?php 
+                             }
+                         }
+                        
+                      } 
+            ?>
+
+                <!-- /Accessories -->
               </div>
               
               <div class="tab-pane fade" id="skirts" >
+                <!-- Skirts -->
+
+                <?php foreach ($skirts as $key => $value) {
+                         foreach ($value as $q => $data) {
+                          
+                          //echo '<pre>';print_r($value);echo'</pre>';die();
+                          for ($i=0; $i <= $key ; $i++) { 
+                            
+                          ?>
                 <div class="col-sm-3 imghome">
                   <div class="product-wrap">
                     <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/skirts1.jpg'?>" alt="" />
-                        <h2>Kshs 359/=</h2>
-                        <p>Black Edition</p>
+                      <div class=" text-center">
+                        <img class="imagesize" src="<?php echo $data['picture']; ?>" alt="" />
+                        <h2>Kshs <?php echo $data['price']; ?></h2>
+                        <p><?php echo $data['prod_name']; ?></p>
+
                         <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
                       </div>
                       
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/skirt5.jpg'?>" alt="" />
-                        <h2>Kshs 519/=</h2>
-                        <p>Blue Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/skirts3.jpg'?>" alt="" />
-                        <h2>Kshs 449/=</h2>
-                        <p>Black Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 imghome">
-                  <div class="product-wrap">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img class="imagesize" src="<?php echo base_url(). 'assets/images/skirts4.jpg'?>" alt="" />
-                        <h2>Kshs 389/=</h2>
-                        <p>Pink Edition</p>
-                        <a href="<?php echo base_url(). 'home/add_to_cart_check'?>" class="btn btn-warning add-to-cart"><i class="shop icon"></i></i>Add to cart</a>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
+                
+                <?php 
+                             }
+                         }
+                        
+                      } 
+            ?>
+
+                <!-- /Skirts -->
               </div>
             </div>
   

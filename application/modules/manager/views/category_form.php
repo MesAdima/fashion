@@ -8,21 +8,27 @@
         
         <link rel="icon" type="image/x-icon" href="<?php echo base_url() . 'assets/fonts/fashion.ico'?>" />
         <link type="text/css" href="<?php echo base_url() .'assets/ionicons/css/ionicons.css' ?>" rel="stylesheet" media="screen">
-        <link type="text/css" href="<?php echo base_url() .'assets/dist/css/bootstrap.min-1.css' ?>" rel="stylesheet" media="screen">
-        <link type="text/css" href="<?php echo base_url() .'assets/dist/css/bootstrap-responsive.min.css'?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/dist/css/table_bootstrap.css' ?>" rel="stylesheet" media="screen">
+        <link type="text/css" href="<?php echo base_url() .'assets/bootstrap/css/bootstrap-responsive.min.css'?>" rel="stylesheet" media="screen">
         <link type="text/css" href="<?php echo base_url() .'assets/vendors/easypiechart/jquery.easy-pie-chart.css'?>" rel="stylesheet" media="screen">
         <link type="text/css" href="<?php echo base_url() .'assets/script/jquery/jquery-ui.css' ?>" rel="stylesheet" media="screen">
-        <link type="text/css" href="<?php echo base_url() .'assets/css/ad_styles.css' ?>" rel="stylesheet" media="screen">
+        
         
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+       <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/script/jquery/jquery-ui.js'; ?>"></script>
 
         <script src="<?php echo base_url(). 'assets/vendors/modernizr-2.6.2-respond-1.1.0.min.js'?>"></script>
+          <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/css/datatables.css'; ?>" /> 
+        
+        <link type="text/css" href="<?php echo base_url() .'assets/bootstrap/css/bootstrap.css' ?>" rel="stylesheet">
+
         <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/jquery.datatables.min.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/js/datatables.js'; ?>"></script>
+        <link type="text/css" href="<?php echo base_url() .'assets/css/ad_styles.css' ?>" rel="stylesheet" media="screen">
 
     </head>
     
@@ -262,19 +268,20 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Categories</div>
-                                    <div class="pull-right"><span class="badge badge-info"><?php echo $categorynumber?></span></div>
+                                    <div class="pull-right"><span class="badge badge-info"><?php echo $categorynumber?></span>
 
-                                    
+                                    </div>
                                 </div>
                                 <div class="block-content collapse in">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped datatable" id="categorytable">
                                         <thead>
 
 
                                             <tr>
                                                 <th>#</th>
                                                 <th>Category Name</th>
-                                                <th colspan="2">Actions</th>
+                                                <th>View</th>
+                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -309,11 +316,11 @@
 
         
 
-        <script src="<?php echo base_url(). 'assets/vendors/jquery-1.9.1.min.js'?>"></script>
-        <script src="<?php echo base_url(). 'assets/dist/js/bootstrap.min.js'?>"></script>
+        <script src="<?php echo base_url(). 'assets/bootstrap/js/bootstrap.js'?>"></script>
         <script src="<?php echo base_url(). 'assets/vendors/easypiechart/jquery.easy-pie-chart.js'?>"></script>
         <script src="<?php echo base_url(). 'assets/js/ad_scripts.js'?>"></script>
-        <script src="<?php echo base_url(). 'assets/dist/js/table_bootstrap.js'?>"></script>
+        
+        <!--<script src="<?php echo base_url(). 'assets/js/jquery-2.1.1.min.js'?>"></script>-->
         <script>
         $(function() {
             
@@ -326,7 +333,7 @@
         });
         </script>
         <script type="text/javascript">
-            $('#datatable').dataTable();
+            $('#categorytable').dataTable();
             $('.dataTables_filter input').addClass('form-control').attr('placeholder','Search');
             $('.dataTables_length select').addClass('form-control');
         </script>
