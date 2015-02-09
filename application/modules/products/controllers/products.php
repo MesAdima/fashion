@@ -9,7 +9,7 @@ class Products extends MY_Controller {
         parent::__construct();
 
 
-        $this->load->model('product_model');
+        $this->load->model('products/product_model');
 
         if ($this->session->userdata('logged_in')) {
          	$this->logged_in = TRUE;

@@ -7,7 +7,8 @@ class Home extends MY_Controller {
 	function __construct()
     {
 
-        $this->load->model('m_home');
+        
+        $this->load->model('home/model_home');
 
         parent::__construct();
 
@@ -59,7 +60,7 @@ class Home extends MY_Controller {
     function getshirts()
 	{
 		$shirts = array();
-       $results = $this->m_home->get_shirts();
+       $results = $this->model_home->get_shirts();
 
        foreach ($results as $key => $values) {
        	 
@@ -76,7 +77,7 @@ class Home extends MY_Controller {
 	function getskirts()
 	{
 		$skirts = array();
-       $results = $this->m_home->get_skirts();
+       $results = $this->model_home->get_skirts();
 
        foreach ($results as $key => $values) {
        	 
@@ -93,7 +94,7 @@ class Home extends MY_Controller {
 	function getsuits()
 	{
 		$suits = array();
-       $results = $this->m_home->get_suits();
+       $results = $this->model_home->get_suits();
 
        foreach ($results as $key => $values) {
        	 
@@ -110,7 +111,7 @@ class Home extends MY_Controller {
 	function getaccessories()
 	{
 		$accessories = array();
-       $results = $this->m_home->get_accessories();
+       $results = $this->model_home->get_accessories();
 
        foreach ($results as $key => $values) {
        	 
