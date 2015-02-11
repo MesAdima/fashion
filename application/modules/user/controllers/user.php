@@ -68,7 +68,7 @@ class User extends MY_Controller {
 			$this->load->view('log_header');
 		    $this->load->view('v_log');
 		    $this->load->view('home/footer');
-		    // $data['new_user'] = 'Incorrect Username or Password<br/><br/>Please try again...';
+		     $data['new_user'] = 'Incorrect Username or Password<br/><br/>Please try again...';
 		}else{
 			
 			$result = $this->user_model->log_member();		
