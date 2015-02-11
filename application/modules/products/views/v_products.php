@@ -224,16 +224,7 @@
 					
 				</div>
 
-				
-<<<<<<< HEAD
-=======
-				<div id="cart">
-					
-					
-				</div> -->
-				
-				
->>>>>>> 817f19021d30d1a4471f4193d6e848bdb3c64760
+
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
