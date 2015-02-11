@@ -171,7 +171,7 @@ class User_model extends MY_Model {
                 $this -> set_session($session_data);
                 return 'logged_in';
              } else {
-               return "incorrect_password";
+               return "session_fail";
              }
            }else{
              return "not_activated";
