@@ -65,10 +65,12 @@ class User extends MY_Controller {
         $this->form_validation->set_rules('l_username', 'UserName', 'trim|min_length[3]|required|xss_clean');
         
         if($this->form_validation->run() == FALSE){
+        	$data['new_user'] = 'Please enter your credentials';
 			$this->load->view('log_header');
-		    $this->load->view('v_log');
+		    $this->load->view('v_log',$data);
 		    $this->load->view('home/footer');
-		     $data['new_user'] = 'Incorrect Username or Password<br/><br/>Please try again...';
+		     
+			 
 		}else{
 			
 			$result = $this->user_model->log_member();		

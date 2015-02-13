@@ -141,9 +141,9 @@ class User_model extends MY_Model {
 
 
         $result = $this->db->query($sql);
-
+        
         $row = $result->row();
-         echo '<pre>';print_r($result);echo'</pre>';die;
+         //echo '<pre>';print_r($result);echo'</pre>';die;
         $sql2 = "SELECT * FROM logs WHERE username = '". $username ."' AND activated = 0 ";
 
         $result2 = $this->db->query($sql2);
@@ -229,7 +229,4 @@ class User_model extends MY_Model {
           return TRUE;
          }
     }
-
-    
-   
-}
+    }
