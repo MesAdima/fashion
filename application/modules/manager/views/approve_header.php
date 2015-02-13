@@ -55,15 +55,13 @@
 
   <?php
   $log_type = $this->session->userdata('lt_id');
+  $username = $this->session->userdata('username');
       if($logged_in){
 
         $username = $this->session->userdata('username');
   ?>
 
-  <li><a href="#"><i class="star icon"></i> Wishlist</a></li>
-  <li><a href="#"><i class="shop icon"></i> Cart</a></li>
-
-  <li><div class="ui vertical divider"></div></li>
+  
 
   <li>
     <div class="ui simple dropdown item">
@@ -72,6 +70,7 @@
         <a class="item"><i class="edit icon"></i> View Profile</a>
         <a class="item"><i class="mail icon"></i> Messages</a>
         <div class="ui divider"></div>
+
         <a href='<?php echo base_url(). 'user/logout'?>' class="item"><i class="sign out icon"></i> Log Out</a>
        </div>
     </div>
@@ -115,17 +114,15 @@
 <div id='topmenu' class="over">
 <ul>
    <li class='left'><a href='<?php echo base_url(). 'home/index'?>'>Home</a></li>
-   <li class='left'><a href='<?php echo base_url(). 'products/view'?>'>Products</a>
-     
-   </li>
-   <li class='left'><a href='<?php echo base_url(). 'home/about'?>'>About</a></li>
+   <li class='left active'><a href='<?php echo base_url(). 'manager/approvals'?>'>Product Approvals</a></li>
+   <li class='left'><a href='<?php echo base_url(). 'products/view'?>'>Products</a></li>
    <li class='left'><a href='<?php echo base_url(). 'home/contact'?>'>Contact</a></li>
 
- <?php
+   <?php
        if(($logged_in) && ($log_type==3)){
    ?>
+     <li class='right'><a href='<?php echo base_url(). 'user/ad_page'?>'>Admin Page</a>
       <li class='right'><a href='<?php echo base_url(). 'user/logout'?>'>Log Out</a>
-      <li class='right'><a href='<?php echo base_url(). 'user/ad_page'?>'>Admin Page</a>
   <?php 
       }elseif(($logged_in) && ($log_type==2)){
   ?>
@@ -133,26 +130,20 @@
         <li class='right'><a href='<?php echo base_url(). 'user/logout'?>'>Log Out</a>
         <li class='right'><a href='<?php echo base_url(). 'manager/home'?>'>Manager Page</a>
         <li class='right'><a href='<?php echo base_url(). 'manager/approvals'?>'>Approval Page</a>
-          
     <?php
        }elseif($logged_in){
     ?>
-        <li class='right'><a href='<?php echo base_url(). 'user/logout'?>'>Log Out</a>
+      <li class='right'><a href='<?php echo base_url(). 'user/sign'?>'>Sign Up</a>
+      <li class='right'><a href='<?php echo base_url(). 'user/log'?>'>Log In</a>
    <?php
       }else{
    ?>
-        
-        <li class='right'><a href='<?php echo base_url(). 'user/sign'?>'>Sign Up</a>
-        <li class='right'><a href='<?php echo base_url(). 'user/log'?>'>Log In</a>
+        <li class='right'><a href='<?php echo base_url(). 'user/logout'?>'>Log Out</a>
+
         <?php
       }
    ?>
-
-
-
    </li>
 </ul>
 </div>
 <!-- /Top Home Navigation -->
-
-

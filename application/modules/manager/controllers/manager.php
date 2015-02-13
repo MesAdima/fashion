@@ -25,6 +25,24 @@ class Manager extends MY_Controller {
     }
 
 
+    function choosewaits()
+  {
+    $proddet = array();
+       $results = $this->m_manager->get_waiting_products();
+
+       foreach ($results as $key => $values) {
+         
+          
+           $proddet['proddet'][] = $values;
+         
+       }
+
+       // echo '<pre>';print_r($proddet);echo '</pre>';die;
+
+        return $proddet;
+  }
+
+
     function createcompaniesview($type)
     {
         $companies = $this->m_manager->get_all_companies();
@@ -44,7 +62,7 @@ class Manager extends MY_Controller {
                     $company_style .= '<td>'.$company_details['company_email'].'</td>';
                     $company_style .= '<td>'.$company_details['date_registered'].'</td>';
                     $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/categoryprofile/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
-                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'manager/updatecategory/delete/'.$company_details['comp_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'manager/updatecompany/delete/'.$company_details['comp_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     
                     $company_style .= '</tr>';
                     $counter++;
@@ -95,6 +113,38 @@ class Manager extends MY_Controller {
         return $product_style;
     }
 
+    function createmessagesview($type)
+    {
+        $messages = $this->m_manager->get_all_messages();
+        $message_style = '';
+        if ($messages) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($messages as $key => $message_details) {
+                    $message_style .= '<tr>';
+                    // $user_style .= '<td>'.$counter.'</td>';
+                    $message_style .= '<td>'.$message_details['mm_id'].'</td>';
+                    $message_style .= '<td>'.$message_details['mm_subject'].'</td>';
+                    $message_style .= '<td>'.$message_details['mm_message'].'</td>';
+                    $message_style .= '<td>'.$message_details['date_sent'].'</td>';
+                    $message_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/messageprofile/'.$message_details['mm_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $message_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'manager/updatemessage/delete/'.$message_details['mm_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    
+                    $message_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+            }
+        }
+
+        return $message_style;
+    }
+
     function createcategoriesview($type)
     {
         $categories = $this->m_manager->get_all_categories();
@@ -138,7 +188,7 @@ class Manager extends MY_Controller {
                     $typ_style .= '<td>'.$typ_details['type_id'].'</td>';
                     $typ_style .= '<td>'.$typ_details['type_name'].'</td>';
                     $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/categoryprofile/'.$typ_details['type_id'].'"><i class="ion-eye icon black"></i></a></td>';
-                    $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'manager/updatecategory/delete/'.$typ_details['type_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'manager/updatetype/delete/'.$typ_details['type_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     $typ_style .= '</tr>';
                     $counter++;
                 }
@@ -155,7 +205,7 @@ class Manager extends MY_Controller {
 
     function updatetype($type, $type_id)
   {
-    $update = $this->admin_model->updatetype($type, $type_id);
+    $update = $this->m_manager->updatetype($type, $type_id);
     if($update)
     {
       switch ($type) {
@@ -168,6 +218,87 @@ class Manager extends MY_Controller {
           break;
       }
     }
+  }
+
+  function updatecompany($type, $comp_id)
+  {
+    $update = $this->m_manager->updatecompany($type, $comp_id);
+    if($update)
+    {
+      switch ($type) {
+        case 'delete':
+          redirect(base_url() .'manager/home');
+          break;
+        
+        default:
+          # code...
+          break;
+      }
+    }
+  }
+
+  function updatecategory($type, $cat_id)
+  {
+    $update = $this->m_manager->updatecategory($type, $cat_id);
+    if($update)
+    {
+      switch ($type) {
+        case 'delete':
+          redirect(base_url() .'manager/home');
+          break;
+        
+        default:
+          # code...
+          break;
+      }
+    }
+  }
+
+
+  function updatemessage($type, $mm_id)
+  {
+    $update = $this->m_manager->updatemessage($type, $mm_id);
+    if($update)
+    {
+      switch ($type) {
+        case 'delete':
+          redirect(base_url() .'manager/home');
+          break;
+        
+        default:
+          # code...
+          break;
+      }
+    }
+  }
+
+  function updateproduct($type, $prod_id)
+  {
+
+    echo "Getting";
+    //print_r($prod_id);die();
+    // $update = $this->m_manager->updateproduct($type, $prod_id);
+    // if($update)
+    // {
+    //   //print_r($update);die();
+    //   switch ($type) {
+    //     case 'approve':
+    //       $message['approve_message'] = 'approve';
+    //       redirect(base_url() .'manager/approvals/'.$message);
+    //       break;
+
+    //     case 'disapprove':
+    //       $message['approve_message'] = 'disapprove';
+    //       redirect(base_url() .'manager/approvals/'.$message);
+    //       break;
+        
+    //     default:
+    //       # code...
+    //       break;
+    //   }
+    // }else{
+    //   //echo "Problem";
+    // }
   }
 
 
@@ -315,6 +446,26 @@ class Manager extends MY_Controller {
           //echo '<pre>'; print_r($results); echo '</pre>';die;
   }
 
+  public function getwaitnumber()
+  {
+          $results = $this->m_manager->waitnumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+  }
+
+  public function getdisapporvenumber()
+  {
+          $results = $this->m_manager->disapprovenumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+  }
+
+  
+
 
    function home()
    {
@@ -339,12 +490,36 @@ class Manager extends MY_Controller {
    function productsview()
    {
     $data['messagenumber']  = $this->getmessagenumber();
+    $data['approvenumber']  = $this->getwaitnumber();
     $data['productnumber']  = $this->getproductnumber();
     $data['categorynumber']  = $this->getcategorynumber();
     $data['typenumber']  = $this->gettypenumber();
     $data['companynumber']  = $this->getcompanynumber();
     $data['product_table'] = $this->createproductsview('table');
     $this->load->view('products_view',$data);
+      
+   }
+
+   function approvals($message=NULL)
+   {
+    $data['error'] = '';
+    $data['approve_message'] = $message;
+    $data['waits'] = $this->choosewaits();
+
+    $this->load->view('approve_header', array('logged_in' => $this->logged_in));  
+    $this->load->view('approvals',$data); 
+    $this->load->view('approve_footer');   
+   }
+
+   function messages()
+   {
+    $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber();
+    $data['message_table'] = $this->createmessagesview('table');
+    $this->load->view('messages',$data);
       
    }
 

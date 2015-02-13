@@ -9,8 +9,27 @@ class M_manager extends MY_Model {
     }
 
 
+    public function get_waiting_products()
+  {
+    $products = array();
+    $query = $this->db->get_where('products', array('is_deleted' => 0, 'approved' => 2));
+    $result = $query->result_array();
+
+    if ($result) {
+      foreach ($result as $key => $value) {
+        $products[$value['prod_id']] = $value;
+      }
+      //echo '<pre>';print_r($value);echo '</pre>';die();
+      
+      return $products;
+    }
+    
+    return $products;
+  }
+
+
     public function usernumber(){
-    $sql = "SELECT COUNT(`ac_id`) as users FROM accounts";
+    $sql = "SELECT COUNT(`ac_id`) as users FROM accounts WHERE `is_deleted` = 0";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -20,7 +39,7 @@ class M_manager extends MY_Model {
    }
 
    public function companynumber(){
-    $sql = "SELECT COUNT(`comp_id`) as companies FROM company";
+    $sql = "SELECT COUNT(`comp_id`) as companies FROM company WHERE `status` = 1";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -30,7 +49,7 @@ class M_manager extends MY_Model {
    }
 
    public function messagenumber(){
-    $sql = "SELECT COUNT(`mail_id`) as mails FROM mail";
+    $sql = "SELECT COUNT(`mm_id`) as mails FROM manager_mail WHERE `is_deleted` = 0";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -40,7 +59,27 @@ class M_manager extends MY_Model {
    }
 
    public function productnumber(){
-    $sql = "SELECT COUNT(`prod_id`) as products FROM products";
+    $sql = "SELECT COUNT(`prod_id`) as products FROM products WHERE `is_deleted` = 0 AND `approved` = 1";
+
+        $result = $this->db->query($sql);
+        $data = $result->row();
+        //print_r($data);die();
+
+        return $data->products;
+   }
+
+   public function waitnumber(){
+    $sql = "SELECT COUNT(`prod_id`) as products FROM products WHERE `is_deleted` = 0 AND `approved` = 2";
+
+        $result = $this->db->query($sql);
+        $data = $result->row();
+        //print_r($data);die();
+
+        return $data->products;
+   }
+
+   public function disapprovenumber(){
+    $sql = "SELECT COUNT(`prod_id`) as products FROM products WHERE `is_deleted` = 0 AND `approved` = 0";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -50,7 +89,7 @@ class M_manager extends MY_Model {
    }
 
    public function categorynumber(){
-    $sql = "SELECT COUNT(`cat_id`) as categories FROM category";
+    $sql = "SELECT COUNT(`cat_id`) as categories FROM category WHERE `status` = 1";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -60,7 +99,7 @@ class M_manager extends MY_Model {
    }
 
    public function typenumber(){
-    $sql = "SELECT COUNT(`type_id`) as types FROM type";
+    $sql = "SELECT COUNT(`type_id`) as types FROM type  WHERE `status` = 1";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -73,7 +112,7 @@ class M_manager extends MY_Model {
    public function get_all_products()
   {
     $products = array();
-    $query = $this->db->get_where('products', array('is_deleted' => 0));
+    $query = $this->db->get_where('products', array('is_deleted' => 0, 'approved' => 1));
     $result = $query->result_array();
 
     if ($result) {
@@ -86,6 +125,24 @@ class M_manager extends MY_Model {
     }
     
     return $products;
+  }
+
+  public function get_all_messages()
+  {
+    $messages = array();
+    $query = $this->db->get_where('manager_mail', array('is_deleted' => 0));
+    $result = $query->result_array();
+
+    if ($result) {
+      foreach ($result as $key => $value) {
+        $messages[$value['mm_id']] = $value;
+      }
+      //echo '<pre>';print_r($users);echo '</pre>';die();
+      
+      return $messages;
+    }
+    
+    return $messages;
   }
 
   public function get_all_companies()
@@ -218,6 +275,117 @@ class M_manager extends MY_Model {
     }
     $this->db->where('comp_id', $cat_id);
     $update = $this->db->update('company', $data);
+
+    if ($update) {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public function updatemessage($type, $mm_id)
+  {
+    $data = array();
+    switch ($type) {
+      case 'delete':
+        $data['is_deleted'] = 0; 
+        
+        break;
+      
+      case 'update':
+        $data = $this->input->post();
+        break;
+      default:
+        # code...
+        break;
+    }
+    $this->db->where('mm_id', $mm_id);
+    $update = $this->db->update('manager_mail', $data);
+
+    if ($update) {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
+  public function updateproduct($type, $prod_id)
+  {
+    $data = array();
+    switch ($type) {
+      case 'approve':
+        $data['approved'] = 1; 
+        
+        break;
+      
+      case 'disapprove':
+         $data['approved'] = 0; 
+
+        break;
+
+      default:
+        # code...
+        break;
+    }
+    $this->db->where('prod_id', $prod_id);
+    $update = $this->db->update('products', $data);
+
+    if($type=="approve"){
+
+          $subject = "New Product Approved";
+          $message = 'Product ID '.$prod_id.' was approved';
+
+      $mail_to_admin = array();
+      $mail_admin = array(
+          'mm_subject' => $subject,
+          'mm_message' => $message
+        );
+
+      array_push($mail_to_admin, $mail_admin);
+
+      $this->db->insert_batch('mail',$mail_to_admin);
+
+
+    }elseif ($type=="disapprove") {
+
+
+          $subject = "New Product Disapproved";
+          $message = 'Product ID '.$prod_id.' was disapproved';
+
+      $mail_to_admin = array();
+      $mail_admin = array(
+          'mm_subject' => $subject,
+          'mm_message' => $message
+        );
+
+      array_push($mail_to_admin, $mail_admin);
+
+      $this->db->insert_batch('mail',$mail_to_admin);
+
+
+    }else{
+
+      $subject = "New Product Needs Approval";
+      $message = 'New product called '.$productname.' from '.$productcompany.' needs your approval';
+
+      $mail_to_manager = array();
+      $mail_manager = array(
+          'mm_subject' => $subject,
+          'mm_message' => $message
+        );
+
+      array_push($mail_to_manager, $mail_manager);
+
+      $this->db->insert_batch('manager_mail',$mail_to_manager);
+    }
+
+
+
 
     if ($update) {
       return true;

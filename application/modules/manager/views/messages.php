@@ -29,6 +29,7 @@
         <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/jquery.datatables.min.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/js/datatables.js'; ?>"></script>
         <link type="text/css" href="<?php echo base_url() .'assets/css/ad_styles.css' ?>" rel="stylesheet" media="screen">
+        
     </head>
     
     <body>
@@ -122,30 +123,7 @@
             </div>
         </div>
 
-        <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button> -->
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+  
 
         <div class="container-fluid">
             <div class="row-fluid">
@@ -184,157 +162,104 @@
                     
                     <div class="row-fluid addlength">
                         <!-- <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4>Success</h4>
-                          Logged in succesfully</div> -->
-                          <div class="navbar">
-                              <div class="navbar-inner">
-                                  <ul class="breadcrumb">
-                                      <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                      <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                      <li>
-                                          <a href="#">Dashboard</a> <span class="divider">|</span>  
-                                      </li>
-                                      
-                                      <li class="active">Company</li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
+                        	Logged in succesfully</div> -->
+                        	<div class="navbar">
+                            	<div class="navbar-inner">
+	                                <ul class="breadcrumb">
+	                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+	                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+	                                    <li>
+	                                        <a href="#">Dashboard</a> <span class="divider">|</span>	
+	                                    </li>
+	                                    
+	                                    <li class="active">Messages</li>
+	                                </ul>
+                            	</div>
+                        	</div>
+                    	</div>
 
-                      
+                        <!-- stats -->
 
-                      <div class="span9" id="content">
-                      
 
-                  
-                    <div class="row-fluid addlength">
-                         <!-- block -->
+                 <!-- <div class="row-fluid">
+                        
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">New Company</div>
+                                <div class="muted pull-left">Statistics</div>
+                                <div class="pull-right"><span class="badge badge-warning">View More</span>
+
+                                </div>
                             </div>
                             <div class="block-content collapse in">
-                                <div class="span12">
-          <!-- BEGIN FORM-->
-          <form enctype="multipart/form-data" method="POST" action="<?php echo base_url() . 'manager/create_company'?>" class="form-horizontal black" role="form">
-            <?php 
-                                  echo form_open_multipart(base_url().'manager/create_company');
-                              ?>
-                        <fieldset>
-              <div class="alert alert-error hide">
-                <button class="close" data-dismiss="alert"></button>
-                Please complete filling the form
-              </div>
-              <div class="alert alert-success hide">
-                <button class="close" data-dismiss="alert"></button>
-                Product has been added successfully
-              </div>
+                                <div class="span3">
+                                    <div class="chart" data-percent="73">73%</div>
+                                    <div class="chart-bottom-heading"><span class="label label-info">Visitors</span>
 
-                <div class="control-group">
-                  <label class="control-label">Company Name<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companyname" data-required="1" required value="<?php echo set_value('companyname'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
+                                <div class="span3">
+                                    <div class="chart" data-percent="53">53%</div>
+                                    <div class="chart-bottom-heading"><span class="label label-info">Page Views</span>
 
-                <div class="control-group">
-                  <label class="control-label">Location<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companylocation" data-required="1" required value="<?php echo set_value('companylocation'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
+                                <div class="span3">
+                                    <div class="chart" data-percent="83">83%</div>
+                                    <div class="chart-bottom-heading"><span class="label label-info">Users</span>
 
-                <div class="control-group">
-                  <label class="control-label">Address<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companyaddress" data-required="1" required value="<?php echo set_value('companyaddress'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
+                                <div class="span3">
+                                    <div class="chart" data-percent="13">13%</div>
+                                    <div class="chart-bottom-heading"><span class="label label-info">Orders</span>
 
-                <div class="control-group">
-                  <label class="control-label">Phone Number<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companypnumber" data-required="1" required value="<?php echo set_value('companypnumber'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div> -->  
 
-                <div class="control-group">
-                  <label class="control-label">Email<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companyemail" data-required="1" required value="<?php echo set_value('companyemail'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
-
-                
-                
-              
-                <div class="form-actions">
-                  <button type="submit" class="btn btn-primary">Enter Company</button>
-                  <button type="reset" class="btn">Cancel</button>
-                </div>
-            </fieldset>
-                        <?php 
-                                    echo form_close();
-                                 ?>
-          </form>
-          <!-- END FORM-->
-        </div>
-          </div>
-      </div>
-                     
-        </div>
-
-
+                    <!-- /stats -->
 
                     
 
-                   <div class="row-fluid addlength">
+                    <div class="row-fluid addlength">
                         <div class="span12">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Companies</div>
-                                    <div class="pull-right"><span class="badge badge-info"><?php echo $companynumber?></span>
+                                    <div class="muted pull-left">Messages</div>
+                                    <div class="pull-right"><span class="badge badge-info"><?php echo $messagenumber?></span>
 
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
-                                    <div class="table-responsive">
-                                    <table class="table table-striped datatable" id="companytable">
+                                    <table class="table table-striped datatable" id="producttable">
                                         <thead>
 
 
                                             <tr>
                                                 <th>#</th>
-                                                <th>Company Name</th>
-                                                <th>Location</th>
-                                                <th>Address</th>
-                                                <th>Phone Number</th>
-                                                <th>Email</th>
-                                                <th>Date / Time Registered</th>
+                                                <th>Subject</th>
+                                                <th>Message</th>
+                                                <th>Date / Time Sent</th>
                                                 <th>View</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php echo $companies_table; ?>
+                                            <?php echo $message_table; ?>
                                         </tbody>
                                     </table>
-                                </div>
                                 </div>
                             </div>
                             <!-- /block -->
                         </div>
 
                     </div>
-
-
-                  
-
-
-
-
 
                 </div>
             </div>
@@ -343,7 +268,7 @@
 
 
                         <hr>
-            <footer class="span12">
+            <footer>
                 <p>&copy; MareWill Fashion 2015</p>
             </footer>
         </div>
@@ -367,7 +292,7 @@
         });
         </script>
         <script type="text/javascript">
-            $('#companytable').dataTable();
+            $('#producttable').dataTable();
             $('.dataTables_filter input').addClass('form-control').attr('placeholder','Search');
             $('.dataTables_length select').addClass('form-control');
         </script>

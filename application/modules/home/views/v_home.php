@@ -1,4 +1,4 @@
-
+<div class="home-container">
 <!-- Top Carousel -->
 <div id="carousel-example-generic" class="carousel slide  carou" data-ride="carousel">
   <!-- Indicators -->
@@ -205,5 +205,7 @@
 </div>
 
 <!-- /Categories -->
+
+</div>
 
 

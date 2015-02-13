@@ -13,7 +13,7 @@ class Product_model extends MY_Model {
   public function get_details()
   {
     $products = array();
-    $query = $this->db->get_where('products', array('is_deleted' => 0));
+    $query = $this->db->get_where('products', array('is_deleted' => 0, 'approved'=> 1));
     $result = $query->result_array();
 
     if ($result) {

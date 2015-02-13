@@ -158,7 +158,7 @@
                             <a href="<?php echo base_url(). 'manager/productsview'?>"><span class="badge badge-alert pull-right"><?php echo $productnumber?></span> Product View</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(). 'manager/statistics'?>"><i class="icon-chevron-right"></i> Statistics (Charts)</a>
+                            <a href="<?php echo base_url(). 'manager/messages'?>"><span class="badge badge-inverse pull-right"><?php echo $messagenumber?></span> Messages</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(). 'manager/category'?>"><span class="badge badge-success pull-right"><?php echo $categorynumber?></span> Categories</a>

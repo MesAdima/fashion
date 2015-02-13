@@ -9,7 +9,7 @@ class Admin_model extends MY_Model {
     }
 
    public function usernumber(){
-    $sql = "SELECT COUNT(`ac_id`) as users FROM accounts";
+    $sql = "SELECT COUNT(`ac_id`) as users FROM accounts WHERE is_deleted = 0";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -19,7 +19,7 @@ class Admin_model extends MY_Model {
    }
 
    public function messagenumber(){
-    $sql = "SELECT COUNT(`mail_id`) as mails FROM mail";
+    $sql = "SELECT COUNT(`mail_id`) as mails FROM mail WHERE is_deleted = 0";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -29,7 +29,7 @@ class Admin_model extends MY_Model {
    }
 
    public function companynumber(){
-    $sql = "SELECT COUNT(`comp_id`) as companies FROM company";
+    $sql = "SELECT COUNT(`comp_id`) as companies FROM company WHERE status = 1";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -39,7 +39,7 @@ class Admin_model extends MY_Model {
    }
 
    public function productnumber(){
-    $sql = "SELECT COUNT(`prod_id`) as products FROM products";
+    $sql = "SELECT COUNT(`prod_id`) as products FROM products WHERE is_deleted = 0";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -69,7 +69,8 @@ class Admin_model extends MY_Model {
   public function get_all_products()
   {
     $products = array();
-    $query = $this->db->get_where('products', array('is_deleted' => 0));
+    $this->db->order_by("prod_id", "desc");
+    $query = $this->db->get_where('products', array('is_deleted' => 0, 'approved' => 1 ));
     $result = $query->result_array();
 
     if ($result) {
@@ -87,6 +88,7 @@ class Admin_model extends MY_Model {
   public function get_all_companies()
   {
     $companies = array();
+
     $query = $this->db->get_where('company', array('status' => 1));
     $result = $query->result_array();
 
@@ -256,13 +258,27 @@ class Admin_model extends MY_Model {
           'prod_company' => $productcompany
       );
 
-        
+      array_push($product_details_data, $product_details);
 
-        array_push($product_details_data, $product_details);
+      $this->db->insert_batch('products',$product_details_data);
+
+
+      $subject = "New Product Needs Approval";
+      $message = 'New product called '.$productname.' from '.$productcompany.' needs your approval';
+
+      $mail_to_manager = array();
+      $mail_manager = array(
+          'mm_subject' => $subject,
+          'mm_message' => $message
+        );
+
+      array_push($mail_to_manager, $mail_manager);
+
+      $this->db->insert_batch('manager_mail',$mail_to_manager);
 
         //echo '<pre>'; print_r($member_details_data); echo '<pre>'; die;
 
-        $this->db->insert_batch('products',$product_details_data);
+        
        
 
       if($this->db->affected_rows() === 1){
@@ -308,7 +324,7 @@ class Admin_model extends MY_Model {
 
     public function get_product_category()
     {
-      $query = "SELECT * FROM category";
+      $query = "SELECT * FROM category WHERE status = 1";
             try {
                 $this->dataSet = $this->db->query($query);
                 $this->dataSet = $this->dataSet->result_array();
@@ -321,7 +337,7 @@ class Admin_model extends MY_Model {
 
     public function get_product_type()
     {
-      $query = "SELECT * FROM type";
+      $query = "SELECT * FROM type WHERE status = 1";
             try {
                 $this->dataSet = $this->db->query($query);
                 $this->dataSet = $this->dataSet->result_array();
@@ -334,7 +350,7 @@ class Admin_model extends MY_Model {
 
      public function get_product_company()
     {
-      $query = "SELECT * FROM company";
+      $query = "SELECT * FROM company WHERE status = 1";
             try {
                 $this->dataSet = $this->db->query($query);
                 $this->dataSet = $this->dataSet->result_array();

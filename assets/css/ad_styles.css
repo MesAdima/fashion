@@ -226,3 +226,11 @@ body {
 .black{
   color:#000000;
 }
+
+.right{
+  float: right;
+}
+
+.badge-red{
+ background-color:#c0392b;
+}

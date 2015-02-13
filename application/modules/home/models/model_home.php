@@ -14,7 +14,7 @@ class Model_home extends MY_Model {
     $products = array();
     $this->db->limit(4);
     $this->db->order_by("prod_id", "desc");
-    $query = $this->db->get_where('products', array('is_deleted' => 0, 'prod_type' => 'SHIRT'));
+    $query = $this->db->get_where('products', array('is_deleted' => 0, 'prod_type' => 'SHIRT', 'approved' => 1));
     $result = $query->result_array();
 
     if ($result) {
@@ -39,7 +39,7 @@ class Model_home extends MY_Model {
     $products = array();
     $this->db->limit(4);
     $this->db->order_by("prod_id", "desc");
-    $query = $this->db->get_where('products', array('is_deleted' => 0, 'prod_type' => 'SKIRT'));
+    $query = $this->db->get_where('products', array('is_deleted' => 0, 'prod_type' => 'SKIRT', 'approved' => 1));
     $result = $query->result_array();
 
     if ($result) {
@@ -59,7 +59,7 @@ class Model_home extends MY_Model {
     $products = array();
     $this->db->limit(4);
     $this->db->order_by("prod_id", "desc");
-    $query = $this->db->get_where('products', array('is_deleted' => 0, 'prod_type' => 'SUITS'));
+    $query = $this->db->get_where('products', array('is_deleted' => 0, 'prod_type' => 'SUITS', 'approved' => 1));
     $result = $query->result_array();
 
     if ($result) {
@@ -79,7 +79,7 @@ class Model_home extends MY_Model {
     $products = array();
     $this->db->limit(4);
     $this->db->order_by("prod_id", "desc");
-    $query = $this->db->get_where('products', array('is_deleted' => 0, 'prod_type' => 'ACCESSORIES'));
+    $query = $this->db->get_where('products', array('is_deleted' => 0, 'prod_type' => 'ACCESSORIES', 'approved' => 1));
     $result = $query->result_array();
 
     if ($result) {

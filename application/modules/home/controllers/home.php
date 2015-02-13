@@ -13,9 +13,9 @@ class Home extends MY_Controller {
         parent::__construct();
 
         if ($this->session->userdata('logged_in')) {
-         	$this->logged_in = TRUE;
+          $this->logged_in = TRUE;
          } else {
-         	//$this->logged_in = FASLE;
+          //$this->logged_in = FASLE;
          }
           
     }

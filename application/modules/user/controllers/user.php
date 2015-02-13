@@ -38,9 +38,7 @@ class User extends MY_Controller {
 	
 	public function manager()
 	{
-		$this->load->view('log_header');
-		$this->load->view('manager');
-		$this->load->view('home/footer');
+		redirect(base_url().'manager/home');
 	}
 
 	function logout()
@@ -65,12 +63,12 @@ class User extends MY_Controller {
         $this->form_validation->set_rules('l_username', 'UserName', 'trim|min_length[3]|required|xss_clean');
         
         if($this->form_validation->run() == FALSE){
-        	$data['new_user'] = 'Please enter your credentials';
+        	$data['new_user'] = 'Please enter your credentials first';
+
 			$this->load->view('log_header');
 		    $this->load->view('v_log',$data);
 		    $this->load->view('home/footer');
-		     
-			 
+
 		}else{
 			
 			$result = $this->user_model->log_member();		

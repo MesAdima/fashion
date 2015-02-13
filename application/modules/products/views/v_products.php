@@ -2,9 +2,9 @@
 
 
 <div class="criteria-bar">
-    <form enctype="multipart/form-data" method="POST" action="<?php echo base_url() . 'products/choosecriteria'?>" class="form-horizontal black" role="form">
+    <form enctype="multipart/form-data" method="POST" action="<?php echo base_url() . 'products/choosefilter'?>" class="form-horizontal black" role="form">
 						<?php 
-                                  echo form_open_multipart(base_url().'products/choosecriteria');
+                                  echo form_open_multipart(base_url().'products/choosefilter');
                               ?>
                         <fieldset>
 							<div class="control-group">
