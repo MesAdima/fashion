@@ -8,6 +8,8 @@ class Admin_model extends MY_Model {
         parent::__construct();
     }
 
+
+
    public function usernumber(){
     $sql = "SELECT COUNT(`ac_id`) as users FROM accounts WHERE is_deleted = 0";
 
@@ -511,6 +513,228 @@ class Admin_model extends MY_Model {
             }
             
             return $this->dataSet;
+    }
+
+    public function ownprofile($ac_id)
+    {
+         $profile = array();
+         
+         $query = $this->db->get_where('accounts', array('ac_id' => $ac_id));
+         $result = $query->result_array();
+
+            if ($result) {
+               foreach ($result as $key => $value) {
+        $profile[$value['ac_id']] = $value;
+      }
+      //echo '<pre>';print_r($messages);echo '</pre>';die();
+      return $profile;
+
+    }
+    
+    return $profile;
+    }
+
+    public function userprofile($ac_id)
+    {
+         $profile = array();
+         
+         $query = $this->db->get_where('accounts', array('ac_id' => $ac_id));
+         $result = $query->result_array();
+
+            if ($result) {
+               foreach ($result as $key => $value) {
+        $profile[$value['ac_id']] = $value;
+      }
+      //echo '<pre>';print_r($messages);echo '</pre>';die();
+      return $profile;
+
+    }
+    
+    return $profile;
+    }
+
+    public function update_member(){
+      $id = $this->input->post('id');
+      $firstname = strtoupper($this->input->post('fname'));
+      $middlename = strtoupper($this->input->post('mname'));
+      $lastname = strtoupper($this->input->post('lname'));
+      $filename = $this->input->post('picture');
+      $pnumber = $this->input->post('pnumber');
+      $gender = strtoupper($this->input->post('gender'));
+      $nationality = strtoupper($this->input->post('nationality'));
+      $age = $this->input->post('age');
+      $religion = strtoupper($this->input->post('religion'));
+      $residence = strtoupper($this->input->post('residence'));    
+      $email = $this->input->post('email');
+
+      $member_details_data = array(
+
+          'f_name' => $firstname,
+          'm_name' => $middlename,
+          'l_name' => $lastname,
+          'age' => $age,
+          'nationality' => $nationality,
+          'phone_no' => $pnumber,
+          'email' => $email,
+          'residence' => $residence,
+          'religion' => $religion,
+          'gender' => $gender
+      );
+
+        $this->db->where('ac_id', $id);
+        $this->db->update('accounts', $member_details_data);
+
+       
+
+      if($this->db->affected_rows() === 1){
+
+        return $id;
+
+      }else{
+
+      $subject = 'Member Entry';
+      $message = 'Problem in registering User ID '.$id.' . Please rectify immediatelly';
+
+      $message_details_data = array();
+      $message_details = array(
+          'subject' => $subject,
+          'message' => $message
+      );
+
+        
+
+        array_push($message_details_data, $message_details);
+
+        //echo '<pre>'; print_r($member_details_data); echo '<pre>'; die;
+
+        $this->db->insert_batch('mail',$message_details_data);
+
+        //echo 'Applicant is not able to be registered';
+        $this->load->library('email');
+        $this->email->from('info@marewill.com','MareWill Fashion');
+        $this->email->to('marekawilly@marewill.com','marekawilly@gmail.com');
+        $this->email->subject('Failed registeration of a user');
+
+        if(isset($email)){
+            $this->email->message('Unable to register and insert user with the email of '.$email.' to the database.');
+        }else{
+            $this->email->message('Unable to register and insert user to the database.');
+
+        }
+
+        $this->email->send();
+        return FALSE;
+     }
+    }
+
+
+    public function productprofile($id)
+    {
+         $profile = array();
+         
+         $query = $this->db->get_where('products', array('prod_id' => $id));
+         $result = $query->result_array();
+
+            if ($result) {
+               foreach ($result as $key => $value) {
+        $profile[$value['prod_id']] = $value;
+      }
+      //echo '<pre>';print_r($messages);echo '</pre>';die();
+      return $profile;
+
+    }
+    
+    return $profile;
+    }
+
+
+    public function companyprofile($id)
+    {
+         $profile = array();
+         
+         $query = $this->db->get_where('company', array('comp_id' => $id));
+         $result = $query->result_array();
+
+            if ($result) {
+               foreach ($result as $key => $value) {
+        $profile[$value['comp_id']] = $value;
+      }
+      //echo '<pre>';print_r($messages);echo '</pre>';die();
+      return $profile;
+
+    }
+    
+    return $profile;
+    }
+
+
+    public function update_product(){
+      $id = $this->input->post('id');
+      $productname = strtoupper($this->input->post('prodname'));
+      $productcategory = strtoupper($this->input->post('prodcategory'));
+      $producttype = strtoupper($this->input->post('prodtype'));
+      $filename = $this->input->post('prodpicture');
+      $productquantity = $this->input->post('prodquantity');
+      $productprice = $this->input->post('prodprice');
+      $productcompany = strtoupper($this->input->post('prodcompany'));
+      
+
+      $product_details_data = array(
+          'prod_name' => $productname,
+          'prod_cat' => $productcategory,
+          'prod_type' => $producttype,
+          
+          'quantity' => $productquantity,
+          'price' => $productprice,
+          'prod_company' => $productcompany
+      );
+
+     
+
+        $this->db->where('prod_id', $id);
+        $this->db->update('products', $product_details_data);
+
+       
+
+      if($this->db->affected_rows() === 1){
+
+        return $id;
+
+      }else{
+
+      $subject = 'Member Entry';
+      $message = 'Problem in registering User ID '.$id.' . Please rectify immediatelly';
+
+      $message_details_data = array();
+      $message_details = array(
+          'subject' => $subject,
+          'message' => $message
+      );
+
+        
+
+        array_push($message_details_data, $message_details);
+
+        //echo '<pre>'; print_r($member_details_data); echo '<pre>'; die;
+
+        $this->db->insert_batch('mail',$message_details_data);
+
+        //echo 'Applicant is not able to be registered';
+        $this->load->library('email');
+        $this->email->from('info@marewill.com','MareWill Fashion');
+        $this->email->to('marekawilly@marewill.com','marekawilly@gmail.com');
+        $this->email->subject('Failed registeration of a user');
+
+        if(isset($email)){
+            $this->email->message('Unable to register and insert user with the email of '.$email.' to the database.');
+        }else{
+            $this->email->message('Unable to register and insert user to the database.');
+
+        }
+
+        $this->email->send();
+        return FALSE;
+     }
     }
 
 

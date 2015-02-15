@@ -232,7 +232,7 @@
                       <?php foreach ($criteria as $key => $value) {
                       	 foreach ($value as $q => $data) {
                       		
-                      		//echo '<pre>';print_r($value);echo'</pre>';die();
+                      		//echo '<pre>';print_r($criteria);echo'</pre>';die();
                       		for ($i=0; $i <= $key ; $i++) { 
                       			
                       		?>

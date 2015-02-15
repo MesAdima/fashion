@@ -9,6 +9,8 @@ class Home extends MY_Controller {
 
         
         $this->load->model('home/model_home');
+        
+        $this->load->library('form_validation');
 
         parent::__construct();
 
@@ -39,14 +41,47 @@ class Home extends MY_Controller {
 		$this->load->view('footer');
 	}
 
-	public function contact()
+	public function contact($name=NULL)
 	{
+    $data['error'] = '';
+
+   $data['reply'] = $name;
+
 		$this->load->view('header', array('logged_in' => $this->logged_in));
-		$this->load->view('contact');
+		$this->load->view('contact',$data);
 		$this->load->view('footer');
 	}
 
+
+  public function sendmessage()
+  {
+         $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('message', 'Message', 'trim|required|xss_clean');
+        
+
+    if($this->form_validation->run() == FALSE){
+       echo 'Wrong validation';die();
+      redirect(base_url() .'home/contact');
+        
+    }else{
+ 
+          $name = $this->model_home->enter_comment();
+               //print_r($result);die();
+
+        if($name){
+                redirect(base_url() .'home/contact/'.$name);
+
+          }else{
+                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+        }
+        }
+  }
+
 	 public function add_to_cart_check($prod_id)
+
 	 {
       if($this->session->userdata('logged_in')){
 			redirect('cart/add_products/'.$prod_id);

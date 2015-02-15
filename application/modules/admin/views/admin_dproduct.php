@@ -122,6 +122,154 @@
                 </div>
             </div>
         </div>
+
+  <div style="width:800px;" class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><?php echo $username?></h4>
+      </div>
+      <div class="modal-body" style="height:1000px;">
+            <?php foreach ($ownprofile as $key => $value) {
+                            foreach ($value as $q => $data) {
+                            
+                           //echo '<pre>';print_r($user);echo'</pre>';die();
+                            for ($i=0; $i <= $key ; $i++) { 
+                                
+                            ?>
+
+
+                    <form enctype="multipart/form-data" method="POST" action="<?php echo base_url() . 'admin/updatemember'?>" class="form-horizontal black" role="form">
+                        <?php 
+                                  echo form_open_multipart(base_url().'admin/updatemember');
+                              ?>
+                        <fieldset>
+                               <?php echo $error?>
+
+                            <div class="alert alert-error hide">
+                                <button class="close" data-dismiss="alert"></button>
+                                Please change the fields that are to be updated
+                            </div>
+                            <div class="alert alert-success hide">
+                                <button class="close" data-dismiss="alert"></button>
+                                Account has been updated successfully
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Account No. <?php echo $data['ac_id']; ?></label>
+                                <div class="controls">
+                                    <input name="id" type="hidden"  value="<?php echo $data['ac_id']; ?>" class="span6 m-wrap form-control "/>
+                                </div>
+                            </div>
+
+                            <div class="control-group" >
+                                <label class="control-label"></label>
+                                <div class="controls" >
+                                    <img style="width:300px;height:300px;" src="<?php echo $data['picture']; ?>">
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="control-group">
+                                <label class="control-label">User First Name<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input type="text" name="fname" data-required="1" required value="<?php echo $data['f_name']; ?>" class="span6 m-wrap form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">User Middle Name<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input name="mname" type="text" required value="<?php echo $data['m_name']?>" class="span6 m-wrap form-control">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">User Last Name<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input name="lname" type="text" required value="<?php echo $data['l_name']?>" class="span6 m-wrap form-control">
+                                </div>
+                             </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Age<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input name="age" type="text" required value="<?php echo $data['age']?>" class="span6 m-wrap form-control "/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                               <label class="control-label">Nationality<span class="required">*</span></label>
+                               <div class="controls">
+                                   <input name="nationality" type="text" required value="<?php echo $data['nationality']?>" class="span6 m-wrap form-control "/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Phone Number<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input name="pnumber" type="text" required value="<?php echo $data['phone_no']?>" class="span6 m-wrap form-control ">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Email<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input name="email" type="email" required value="<?php echo $data['email']?>" class="span6 m-wrap form-control ">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Residence<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input name="residence" type="text" required value="<?php echo $data['residence']?>" class="span6 m-wrap form-control ">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Religion<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input name="religion" type="text" required value="<?php echo $data['religion']?>" class="span6 m-wrap form-control ">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Gender<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input name="gender" type="text" required value="<?php echo $data['gender']?>" class="span6 m-wrap form-control ">
+                                </div>
+                            </div>
+                            
+                        
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Update User Account</button>
+                                
+                            </div>
+                        </fieldset>
+                        <?php 
+                                    echo form_close();
+                                 ?>
+                                 
+                    </form>
+
+                        <?php 
+                             }
+                         }
+                        
+                       }
+                        ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">

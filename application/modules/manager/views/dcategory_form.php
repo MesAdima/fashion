@@ -18,7 +18,7 @@
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'; ?>"></script>
+       <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/script/jquery/jquery-ui.js'; ?>"></script>
 
         <script src="<?php echo base_url(). 'assets/vendors/modernizr-2.6.2-respond-1.1.0.min.js'?>"></script>
@@ -29,6 +29,7 @@
         <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/jquery.datatables.min.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.datatables/bootstrap-adapter/js/datatables.js'; ?>"></script>
         <link type="text/css" href="<?php echo base_url() .'assets/css/ad_styles.css' ?>" rel="stylesheet" media="screen">
+
     </head>
     
     <body>
@@ -119,7 +120,7 @@
             </div>
         </div>
 
-  <div style="width:800px;" class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div style="width:800px;" class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" >
       <div class="modal-header">
@@ -302,144 +303,55 @@
                     
                     <div class="row-fluid addlength">
                         <!-- <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4>Success</h4>
-                          Logged in succesfully</div> -->
-                          <div class="navbar">
-                              <div class="navbar-inner">
-                                  <ul class="breadcrumb">
-                                      <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                      <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                      <li>
-                                          <a href="#">Dashboard</a> <span class="divider">|</span>  
-                                      </li>
-                                      
-                                      <li class="active">Company</li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
+                        	Logged in succesfully</div> -->
+                        	<div class="navbar">
+                            	<div class="navbar-inner">
+	                                <ul class="breadcrumb">
+	                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+	                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+	                                    <li>
+	                                        <a href="#">Dashboard</a> <span class="divider">|</span>	
+	                                    </li>
+	                                    
+	                                    <li class="active">Category</li>
+	                                </ul>
+                            	</div>
+                        	</div>
+                    	</div>
 
                       
 
                       <div class="span9" id="content">
                       
 
-                  
-                    <div class="row-fluid addlength">
-                         <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">New Company</div>
-                            </div>
-                            <div class="block-content collapse in">
-                                <div class="span12">
-          <!-- BEGIN FORM-->
-          <form enctype="multipart/form-data" method="POST" action="<?php echo base_url() . 'manager/create_company'?>" class="form-horizontal black" role="form">
-            <?php 
-                                  echo form_open_multipart(base_url().'manager/create_company');
-                              ?>
-                        <fieldset>
-              <div class="alert alert-error hide">
-                <button class="close" data-dismiss="alert"></button>
-                Please complete filling the form
-              </div>
-              <div class="alert alert-success hide">
-                <button class="close" data-dismiss="alert"></button>
-                Product has been added successfully
-              </div>
-
-                <div class="control-group">
-                  <label class="control-label">Company Name<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companyname" data-required="1" required value="<?php echo set_value('companyname'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
-
-                <div class="control-group">
-                  <label class="control-label">Location<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companylocation" data-required="1" required value="<?php echo set_value('companylocation'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
-
-                <div class="control-group">
-                  <label class="control-label">Address<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companyaddress" data-required="1" required value="<?php echo set_value('companyaddress'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
-
-                <div class="control-group">
-                  <label class="control-label">Phone Number<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companypnumber" data-required="1" required value="<?php echo set_value('companypnumber'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
-
-                <div class="control-group">
-                  <label class="control-label">Email<span class="required">*</span></label>
-                  <div class="controls">
-                    <input type="text" name="companyemail" data-required="1" required value="<?php echo set_value('companyemail'); ?>" class="span6 m-wrap form-control"/>
-                  </div>
-                </div>
-
-                
-                
-              
-                <div class="form-actions">
-                  <button type="submit" class="btn btn-primary">Enter Company</button>
-                  <button type="reset" class="btn">Cancel</button>
-                </div>
-            </fieldset>
-                        <?php 
-                                    echo form_close();
-                                 ?>
-          </form>
-          <!-- END FORM-->
-        </div>
-          </div>
-      </div>
-                     
-        </div>
-
-
-
-                    
-
                    <div class="row-fluid addlength">
                         <div class="span12">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Companies</div>
-                                    <div class="pull-right"><span class="badge badge-info"><?php echo $companynumber?></span>
+                                    <div class="muted pull-left">Categories</div>
+                                    <div class="pull-right"><span class="badge badge-info"><?php echo $dcategorynumber?></span>
 
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
-                                    <div class="table-responsive">
-                                    <table class="table table-striped datatable" id="companytable">
+                                    <table class="table table-striped datatable" id="categorytable">
                                         <thead>
 
 
                                             <tr>
                                                 <th>#</th>
-                                                <th>Company Name</th>
-                                                <th>Location</th>
-                                                <th>Address</th>
-                                                <th>Phone Number</th>
-                                                <th>Email</th>
-                                                <th>Date / Time Registered</th>
+                                                <th>Category Name</th>
                                                 <th>View</th>
-                                                <th>Delete</th>
+                                                <th>Activate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php echo $companies_table; ?>
+                                            <?php echo $categories_table; ?>
                                         </tbody>
                                     </table>
-                                </div>
                                 </div>
                             </div>
                             <!-- /block -->
@@ -485,7 +397,7 @@
         });
         </script>
         <script type="text/javascript">
-            $('#companytable').dataTable();
+            $('#categorytable').dataTable();
             $('.dataTables_filter input').addClass('form-control').attr('placeholder','Search');
             $('.dataTables_length select').addClass('form-control');
         </script>

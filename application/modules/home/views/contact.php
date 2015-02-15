@@ -1,6 +1,24 @@
-<div id="home" class="headering scroll">
+
 			<div class="container">
-				
+				<div id="home" class="headering scroll">
+
+	<?php 
+       $reply = str_replace('%20', ' ', $reply);
+	    
+	    if(isset($reply)){
+
+	?>
+	    <div class="well well-sm">
+            Thank you <?php echo $reply?>  for commenting in our site
+	    </div>
+
+	<?php 
+          } else{
+    ?>
+          <div class="well well-sm">
+
+	    </div>
+	<?php }?>
 				<!-- <div class="logo">
 					<a href="index.html"><img src="web/images/logo.png" title="Mabur" /></a>
 				</div> -->
@@ -11,7 +29,7 @@
 				<div class="slide-text text-center">
 					<h1>MAREWILL FASHION</h1>
 					<span>WANT TO KNOW MORE</span>
-					<a class="slide-btn btn-color" href="#contacts">contacts</a>
+					<a class="slide-btn btn-color" href="#contacts">Contacts</a>
 				</div>
 				<!----//End-top-nav---->
 			</div>
@@ -37,14 +55,14 @@
 		<div class="section group">
 			  <div class="col span_2_of_3">
 				  <div class="contacts-form">
-				  	  <form method="post" action="#">
+				  	  <form method="post" action="<?php echo base_url(). 'home/sendmessage'?>">
 					    	
-					    		<input type="text" class="textbox" placeholder="Enter Your Name Here">
-						    	<input type="text" class="textbox" placeholder="Enter Your Email Here">
+					    		<input type="text" required name="name" class="textbox" placeholder="Enter Your Name Here">
+						    	<input type="text" required name="email" class="textbox" placeholder="Enter Your Email Here">
 						    	<div class="clear"> </div>
 						   
 						    <div>
-						    	<textarea placeholder="Enter Your Message Here:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Message Here';}">Enter Your Message Here...</textarea>
+						    	<textarea name="message" required placeholder="Enter Your Message Here:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Message Here';}">Enter Your Message Here...</textarea>
 						    </div>
 						  <span><input type="submit" class="btn-color" value="Submit"></span>
 						  <div class="clear"></div>
@@ -53,7 +71,7 @@
   				</div>
 				<div class="col span_1_of_3">
 					<div class="company_address">
-				     	<h5>OUR contactsS</h5>
+				     	<h5>Our Contacts</h5>
 						<ul class="list3">
 							<li>
 								<img src="<?php echo base_url() . 'assets/images/location.png'?>" alt=""/>

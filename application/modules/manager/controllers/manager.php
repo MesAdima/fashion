@@ -43,8 +43,135 @@ class Manager extends MY_Controller {
   }
 
 
-    function createcompaniesview($type)
+    function categoryupdate()
     {
+       $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('catname', 'Category Name', 'trim|required|xss_clean|is_unique[category.cat_name]');
+        
+        
+
+    if($this->form_validation->run() == FALSE){
+      // echo 'Not working';die();
+      redirect(base_url() .'manager/category');
+        
+    }else{
+ 
+          $result = $this->m_manager->update_category();
+               //print_r($result);
+
+        if($result){
+                redirect(base_url() .'manager/category');
+
+          }else{
+                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+        }
+        }
+         
+    }
+
+
+     function typeupdate()
+    {
+       $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('typename', 'Type Name', 'trim|required|xss_clean|is_unique[type.type_name]');
+        
+        
+
+    if($this->form_validation->run() == FALSE){
+      // echo 'Not working';die();
+      redirect(base_url() .'manager/type');
+        
+    }else{
+ 
+          $result = $this->m_manager->update_type();
+               //print_r($result);
+
+        if($result){
+                redirect(base_url() .'manager/type');
+
+          }else{
+                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+        }
+        }
+         
+    }
+
+
+    function updatemember()
+    {
+        $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('fname', 'First Name', 'trim|min_length[2]|required|xss_clean');
+        $this->form_validation->set_rules('mname', 'Middle Name', 'trim|min_length[2]|xss_clean');
+        $this->form_validation->set_rules('lname', 'Last Name', 'trim|min_length[2]|required|xss_clean');
+        $this->form_validation->set_rules('pnumber', 'Phone Number', 'trim|min_length[9]');
+        $this->form_validation->set_rules('age', 'Age', 'trim|min_length[2]');
+        $this->form_validation->set_rules('residence', 'Residence', 'trim|min_length[3]|xss_clean');
+        $this->form_validation->set_rules('religion', 'Religion', 'trim|min_length[3]|xss_clean');
+        $this->form_validation->set_rules('nationality', 'Nationality', 'trim|min_length[3]|required|xss_clean');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|xss_clean');
+        
+
+        if($this->form_validation->run() == FALSE){
+           echo 'Not working';die();
+            redirect(base_url() .'manager/home');
+            
+        }else{
+
+                $result = $this->m_manager->update_member();
+
+              if($result){
+                 redirect(base_url() .'manager/home');
+
+              }else{
+                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+              }
+
+
+         }
+    }
+
+
+
+    function companyupdate()
+    {
+       $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('companyname', 'Company Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('companylocation', 'Company Location', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('companyaddress', 'Company Address', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('companypnumber', 'Company Phone Number', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('companyemail', 'Company Email', 'trim|required|xss_clean');
+        
+        
+
+    if($this->form_validation->run() == FALSE){
+      // echo 'Not working';die();
+      redirect(base_url() .'manager/company');
+        
+    }else{
+ 
+          $result = $this->m_manager->update_company();
+               //print_r($result);die();
+
+        if($result){
+                redirect(base_url() .'manager/company');
+
+          }else{
+                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+        }
+        }
+         
+    }
+
+
+    function createcompaniesview($type,$status)
+    {
+      switch($status){
+
+       case 'active':
         $companies = $this->m_manager->get_all_companies();
         $company_style = '';
         if ($companies) {
@@ -61,7 +188,7 @@ class Manager extends MY_Controller {
                     $company_style .= '<td>'.$company_details['company_pnumber'].'</td>';
                     $company_style .= '<td>'.$company_details['company_email'].'</td>';
                     $company_style .= '<td>'.$company_details['date_registered'].'</td>';
-                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/categoryprofile/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/companyprofile/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'manager/updatecompany/delete/'.$company_details['comp_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     
                     $company_style .= '</tr>';
@@ -73,14 +200,47 @@ class Manager extends MY_Controller {
                 # code...
                 break;
             }
-        }
+        }break;
 
+        case 'deactive':
+         $companies = $this->m_manager->get_all_dcompanies();
+        $company_style = '';
+        if ($companies) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($companies as $key => $company_details) {
+                    $company_style .= '<tr>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
+                    $company_style .= '<td>'.$company_details['comp_id'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_name'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_location'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_address'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_pnumber'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_email'].'</td>';
+                    $company_style .= '<td>'.$company_details['date_registered'].'</td>';
+                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/categoryprofile/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Activate Profile" href = "'.base_url().'manager/updatecompany/activate/'.$company_details['comp_id'].'"><i class="ion-ios-play icon black"></i></td>';
+                    
+                    $company_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            
+            }
+        }break;
+      }
         return $company_style;
     }
 
 
-    function createadminsview($type)
+    function createadminsview($type,$status)
     {
+
+      switch($status){
+
+        case 'active':
          $admins = $this->m_manager->get_all_admins();
         $admin_style = '';
         if ($admins) {
@@ -100,19 +260,47 @@ class Manager extends MY_Controller {
                     $admin_style .= '<td>'.$admin_details['residence'].'</td>';
                     $admin_style .= '<td>'.$admin_details['religion'].'</td>';
                     $admin_style .= '<td>'.$admin_details['gender'].'</td>';
-                    $admin_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/adminprofile/'.$admin_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
-                    $admin_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'admin/updateadmin/delete/'.$admin_details['ac_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    $admin_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/adminprofile/'.$admin_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $admin_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'manager/updateadmin/delete/'.$admin_details['ac_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     $admin_style .= '</tr>';
                     $counter++;
                 }
                 break;
             
-            default:
-                # code...
-                break;
             }
-        }
+        }break;
 
+        case 'deactive':
+        $admins = $this->m_manager->get_all_dadmins();
+        $admin_style = '';
+        if ($admins) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($admins as $key => $admin_details) {
+                    $admin_style .= '<tr>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
+                    $admin_style .= '<td>'.$admin_details['ac_id'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['f_name'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['l_name'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['age'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['nationality'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['phone_no'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['email'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['residence'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['religion'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['gender'].'</td>';
+                    $admin_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/adminprofile/'.$admin_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $admin_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Activate Profile" href = "'.base_url().'manager/updateadmin/activate/'.$admin_details['ac_id'].'"><i class="ion-ios-play icon black"></i></td>';
+                    $admin_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            
+            }
+        }break;
+       }
         return $admin_style;
       }
 
@@ -143,9 +331,7 @@ class Manager extends MY_Controller {
                 }
                 break;
             
-            default:
-                # code...
-                break;
+           
             }
         }
 
@@ -184,8 +370,11 @@ class Manager extends MY_Controller {
         return $message_style;
     }
 
-    function createcategoriesview($type)
+    function createcategoriesview($type,$status)
     {
+
+      switch($status){
+        case 'active':
         $categories = $this->m_manager->get_all_categories();
         $category_style = '';
         if ($categories) {
@@ -204,17 +393,40 @@ class Manager extends MY_Controller {
                 }
                 break;
             
-            default:
-                # code...
-                break;
+          
             }
-        }
+        }break;
 
+        case 'deactive':
+        $categories = $this->m_manager->get_all_dcategories();
+        $category_style = '';
+        if ($categories) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($categories as $key => $category_details) {
+                    $category_style .= '<tr>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
+                    $category_style .= '<td>'.$category_details['cat_id'].'</td>';
+                    $category_style .= '<td>'.$category_details['cat_name'].'</td>';
+                    $category_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/categoryprofile/'.$category_details['cat_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $category_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Activate Profile" href = "'.base_url().'manager/updatecategory/activate/'.$category_details['cat_id'].'"><i class="ion-ios-play icon black"></i></td>';
+                    $category_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            }
+        }break;
+      }
         return $category_style;
     }
 
-    function createtypesview($type)
+    function createtypesview($type,$status)
     {
+      switch($status){
+
+        case 'active':
         $types = $this->m_manager->get_all_types();
         $typ_style = '';
         if ($types) {
@@ -226,19 +438,41 @@ class Manager extends MY_Controller {
                     // $admin_style .= '<td>'.$counter.'</td>';
                     $typ_style .= '<td>'.$typ_details['type_id'].'</td>';
                     $typ_style .= '<td>'.$typ_details['type_name'].'</td>';
-                    $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/categoryprofile/'.$typ_details['type_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/typeprofile/'.$typ_details['type_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'manager/updatetype/delete/'.$typ_details['type_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     $typ_style .= '</tr>';
                     $counter++;
                 }
                 break;
             
-            default:
-                # code...
-                break;
+            
             }
-        }
+        }break;
 
+
+        case 'deactive':
+        $types = $this->m_manager->get_all_dtypes();
+        $typ_style = '';
+        if ($types) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($types as $key => $typ_details) {
+                    $typ_style .= '<tr>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
+                    $typ_style .= '<td>'.$typ_details['type_id'].'</td>';
+                    $typ_style .= '<td>'.$typ_details['type_name'].'</td>';
+                    $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/typeprofile/'.$typ_details['type_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Activate Profile" href = "'.base_url().'manager/updatetype/activate/'.$typ_details['type_id'].'"><i class="ion-ios-play icon black"></i></td>';
+                    $typ_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            
+        }break;
+      }
+    }
         return $typ_style;
     }
 
@@ -347,7 +581,7 @@ class Manager extends MY_Controller {
   {
     $this->load->library('form_validation');
         
-        $this->form_validation->set_rules('catname', 'Category Name', 'trim|required|xss_clean|is_unique[type.type_name]');
+        $this->form_validation->set_rules('catname', 'Category Name', 'trim|required|xss_clean|is_unique[category.cat_name]');
         
         
 
@@ -500,6 +734,15 @@ class Manager extends MY_Controller {
           //echo '<pre>'; print_r($results); echo '</pre>';die;
   }
 
+  public function getdadminnumber()
+  {
+          $results = $this->m_manager->dadminnumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+  }
+
   public function getmessagenumber()
   {
           $results = $this->m_manager->messagenumber();
@@ -512,6 +755,15 @@ class Manager extends MY_Controller {
   public function getcompanynumber()
   {
           $results = $this->m_manager->companynumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+  }
+
+  public function getdcompanynumber()
+  {
+          $results = $this->m_manager->dcompanynumber();
 
           return $results;
 
@@ -536,9 +788,27 @@ class Manager extends MY_Controller {
           //echo '<pre>'; print_r($results); echo '</pre>';die;
   }
 
+  public function getdcategorynumber()
+  {
+          $results = $this->m_manager->dcategorynumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+  }
+
   public function gettypenumber()
   {
           $results = $this->m_manager->typenumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+  }
+
+  public function getdtypenumber()
+  {
+          $results = $this->m_manager->dtypenumber();
 
           return $results;
 
@@ -570,6 +840,13 @@ class Manager extends MY_Controller {
    {
    		
     $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
     
     
     $data['messagenumber']  = $this->getmessagenumber();
@@ -578,9 +855,9 @@ class Manager extends MY_Controller {
     $data['typenumber']  = $this->gettypenumber();
     $data['companynumber']  = $this->getcompanynumber();
     $data['product_table'] = $this->createproductsview('table');
-    $data['companies_table'] = $this->createcompaniesview('table');
-    $data['categories_table'] = $this->createcategoriesview('table');
-    $data['types_table'] = $this->createtypesview('table');
+    $data['companies_table'] = $this->createcompaniesview('table','active');
+    $data['categories_table'] = $this->createcategoriesview('table','active');
+    $data['types_table'] = $this->createtypesview('table','active');
 
    	$this->load->view('manager', $data);
    		
@@ -588,6 +865,13 @@ class Manager extends MY_Controller {
 
    function productsview()
    {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
     $data['messagenumber']  = $this->getmessagenumber();
     $data['approvenumber']  = $this->getwaitnumber();
     $data['productnumber']  = $this->getproductnumber();
@@ -602,6 +886,7 @@ class Manager extends MY_Controller {
    function approvals($type=NULL)
    {
     $data['error'] = '';
+        
     //echo '<pre>';print_r($message);echo'</pre>';die();
     $data['approve_message'] = $type;
     $data['waits'] = $this->choosewaits();
@@ -613,6 +898,13 @@ class Manager extends MY_Controller {
 
    function messages()
    {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
     $data['messagenumber']  = $this->getmessagenumber();
     $data['productnumber']  = $this->getproductnumber();
     $data['categorynumber']  = $this->getcategorynumber();
@@ -625,6 +917,13 @@ class Manager extends MY_Controller {
 
    function statistics()
    {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
     $data['messagenumber']  = $this->getmessagenumber();
     $data['productnumber']  = $this->getproductnumber();
     $data['categorynumber']  = $this->getcategorynumber();
@@ -636,25 +935,79 @@ class Manager extends MY_Controller {
 
    function category()
    {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
     $data['messagenumber']  = $this->getmessagenumber();
     $data['productnumber']  = $this->getproductnumber();
     $data['categorynumber']  = $this->getcategorynumber();
     $data['typenumber']  = $this->gettypenumber();
     $data['companynumber']  = $this->getcompanynumber(); 
-    $data['categories_table'] = $this->createcategoriesview('table');
+    $data['categories_table'] = $this->createcategoriesview('table','active');
     $this->load->view('category_form',$data);
+      
+   }
+
+   function dcat()
+   {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+    $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber(); 
+    $data['dcategorynumber']  = $this->getdcategorynumber(); 
+    $data['categories_table'] = $this->createcategoriesview('table','deactive');
+    $this->load->view('dcategory_form',$data);
       
    }
 
    function type()
    {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
     $data['messagenumber']  = $this->getmessagenumber();
     $data['productnumber']  = $this->getproductnumber();
     $data['categorynumber']  = $this->getcategorynumber();
     $data['typenumber']  = $this->gettypenumber();
     $data['companynumber']  = $this->getcompanynumber(); 
-    $data['types_table'] = $this->createtypesview('table'); 
+    $data['types_table'] = $this->createtypesview('table','active'); 
     $this->load->view('type_form',$data);
+      
+   }
+
+   function dtype()
+   {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+    $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['dtypenumber']  = $this->getdtypenumber();
+    $data['companynumber']  = $this->getcompanynumber(); 
+    $data['types_table'] = $this->createtypesview('table','deactive'); 
+    $this->load->view('dtype_form',$data);
       
    }
 
@@ -662,6 +1015,13 @@ class Manager extends MY_Controller {
    {
       
     $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
     
     
     $data['messagenumber']  = $this->getmessagenumber();
@@ -669,25 +1029,274 @@ class Manager extends MY_Controller {
     $data['categorynumber']  = $this->getcategorynumber();
     $data['typenumber']  = $this->gettypenumber();
     $data['adminnumber']  = $this->getadminnumber();
+
     $data['companynumber']  = $this->getcompanynumber();
-    $data['admin_table'] = $this->createadminsview('table');
+    $data['admin_table'] = $this->createadminsview('table','active');
     
 
     $this->load->view('admin_page', $data);
       
    } 
 
+
+   function dadmin()
+   {
+      
+    $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+    
+    
+    $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['adminnumber']  = $this->getadminnumber();
+    $data['dadminnumber']  = $this->getdadminnumber();
+    $data['companynumber']  = $this->getcompanynumber();
+    $data['admin_table'] = $this->createadminsview('table','deactive');
+    
+
+    $this->load->view('dadmin_form', $data);
+      
+   } 
+
    function company()
    {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
     $data['messagenumber']  = $this->getmessagenumber();
     $data['productnumber']  = $this->getproductnumber();
     $data['categorynumber']  = $this->getcategorynumber();
     $data['typenumber']  = $this->gettypenumber();
     $data['companynumber']  = $this->getcompanynumber();  
-    $data['companies_table'] = $this->createcompaniesview('table');
+    $data['companies_table'] = $this->createcompaniesview('table','active');
     $this->load->view('company_form',$data);
       
    }
+
+
+   function dcomp()
+   {
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+    $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber();  
+    $data['dcompanynumber']  = $this->getdcompanynumber();  
+    $data['companies_table'] = $this->createcompaniesview('table','deactive');
+    $this->load->view('dcompany_form',$data);
+      
+   }
+
+   function productprofile($id)
+    {
+        $userdet = array();
+        $results = $this->m_manager->productprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['product'][] = $values;  
+        }
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+
+        $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+        $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber();  
+    $data['dcompanynumber']  = $this->getdcompanynumber();  
+        $data['product'] = $details;
+        
+
+        $this->load->view('view_product', $data);
+ 
+    }
+
+
+    function adminprofile($id)
+    {
+        $userdet = array();
+        $results = $this->m_manager->adminprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['admin'][] = $values;  
+        }
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+
+        $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+        $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber();  
+    $data['dcompanynumber']  = $this->getdcompanynumber();  
+        $data['admin'] = $details;
+       
+
+        $this->load->view('view_admin', $data);
+ 
+    }
+
+
+    function companyprofile($id)
+    {
+        $userdet = array();
+        $results = $this->m_manager->companyprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['company'][] = $values;  
+        }
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+
+        $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+        $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber();  
+    $data['dcompanynumber']  = $this->getdcompanynumber();  
+        $data['company'] = $details;
+   
+        $this->load->view('view_company', $data);
+ 
+    }
+
+
+    function categoryprofile($id)
+    {
+        $userdet = array();
+        $results = $this->m_manager->categoryprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['category'][] = $values;  
+        }
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+
+        $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+        $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber();  
+    $data['dcompanynumber']  = $this->getdcompanynumber();  
+        $data['category'] = $details;
+      
+
+        $this->load->view('view_category', $data);
+ 
+    }
+
+
+    function typeprofile($id)
+    {
+        $userdet = array();
+        $results = $this->m_manager->typeprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['type'][] = $values;  
+        }
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+
+        $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+        $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber();  
+    $data['dcompanynumber']  = $this->getdcompanynumber();  
+        $data['type'] = $details;
+       
+
+        $this->load->view('view_type', $data);
+ 
+    }
+
+
+    function messageprofile($id)
+    {
+        $userdet = array();
+        $results = $this->m_manager->messageprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['message'][] = $values;  
+        }
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+
+        $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->m_manager->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+        $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['companynumber']  = $this->getcompanynumber();  
+    $data['dcompanynumber']  = $this->getdcompanynumber();  
+        $data['message'] = $details;
+       
+
+        $this->load->view('view_message', $data);
+ 
+    }
+
+    
 
 
 

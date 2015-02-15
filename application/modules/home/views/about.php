@@ -4,9 +4,10 @@
 </head>
 <body>
 	<div id= "aboutpage">
-			<div style="margin-right:-40px;" class="container premcontent animated wow fadeInDown">
-				<img src="<?php echo base_url() . 'assets/images/ThisisEss14.jpg'?>">
-				<img width="453px" height="680px" src="<?php echo base_url() . 'assets/images/This-Is-Ess.jpg'?>">
+			<div style="margin-right:140px;" class="container premcontent animated wow fadeInDown">
+				<img width="553px" height="680px" src="<?php echo base_url() . 'assets/images/blackchildsuit.jpg'?>">
+				<img width="553px" height="680px" src="<?php echo base_url() . 'assets/images/blacksweater.jpg'?>">
+				
 				</div>
 					<div class="container">
 				<h2>About Marewill</h2>

@@ -22,6 +22,75 @@ class Admin extends MY_Controller {
         $this->pic_path = realpath(APPPATH . '../uploads/');
           
     }
+   
+
+    function updatemember()
+    {
+        $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('fname', 'First Name', 'trim|min_length[2]|required|xss_clean');
+        $this->form_validation->set_rules('mname', 'Middle Name', 'trim|min_length[2]|xss_clean');
+        $this->form_validation->set_rules('lname', 'Last Name', 'trim|min_length[2]|required|xss_clean');
+        $this->form_validation->set_rules('pnumber', 'Phone Number', 'trim|min_length[9]');
+        $this->form_validation->set_rules('age', 'Age', 'trim|min_length[2]');
+        $this->form_validation->set_rules('residence', 'Residence', 'trim|min_length[3]|xss_clean');
+        $this->form_validation->set_rules('religion', 'Religion', 'trim|min_length[3]|xss_clean');
+        $this->form_validation->set_rules('nationality', 'Nationality', 'trim|min_length[3]|required|xss_clean');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|xss_clean');
+        
+
+        if($this->form_validation->run() == FALSE){
+           echo 'Not working';die();
+            redirect(base_url() .'admin/users');
+            
+        }else{
+
+                $result = $this->admin_model->update_member();
+
+              if($result){
+                 redirect(base_url() .'admin/users');
+
+              }else{
+                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+              }
+
+
+         }
+    }
+
+
+    function productupdate()
+    {
+       $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('prodname', 'Product Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('prodcategory', 'Product Category', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('prodtype', 'Product Type', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('prodquantity', 'Product Quantity', 'trim|required');
+        $this->form_validation->set_rules('prodprice', 'Product Price', 'trim|required');
+        $this->form_validation->set_rules('prodcompany', 'Product Company', 'trim|required|xss_clean');
+        
+
+        if($this->form_validation->run() == FALSE){
+            // echo 'Not working';die();
+            redirect(base_url() .'admin/forms');
+            
+        }else{
+            
+                $result = $this->admin_model->update_product();
+               //print_r($result);
+
+              if($result){
+                redirect(base_url() .'admin/forms');
+
+              }else{
+                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+              }
+            }
+         
+    }
+
+
 
 	
 
@@ -50,7 +119,7 @@ class Admin extends MY_Controller {
                     $user_style .= '<td>'.$user_details['residence'].'</td>';
                     $user_style .= '<td>'.$user_details['religion'].'</td>';
                     $user_style .= '<td>'.$user_details['gender'].'</td>';
-                    $user_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/userprofile/'.$user_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $user_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/viewprofile/'.$user_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     $user_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'admin/updateuser/delete/'.$user_details['ac_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     $user_style .= '</tr>';
                     $counter++;
@@ -84,7 +153,7 @@ class Admin extends MY_Controller {
                     $user_style .= '<td>'.$user_details['residence'].'</td>';
                     $user_style .= '<td>'.$user_details['religion'].'</td>';
                     $user_style .= '<td>'.$user_details['gender'].'</td>';
-                    $user_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/userprofile/'.$user_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $user_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/viewprofile/'.$user_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     $user_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Activate Profile" href = "'.base_url().'admin/updateuser/activate/'.$user_details['ac_id'].'"><i class="ion-ios-play icon black"></i></td>';
                     $user_style .= '</tr>';
                     $counter++;
@@ -127,7 +196,7 @@ class Admin extends MY_Controller {
                     $company_style .= '<td>'.$company_details['company_email'].'</td>';
                     $company_style .= '<td>'.$company_details['date_registered'].'</td>';
                     
-                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/companyprofile/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/viewcompany/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     
                     $company_style .= '</tr>';
                     $counter++;
@@ -159,7 +228,7 @@ class Admin extends MY_Controller {
                     $company_style .= '<td>'.$company_details['company_email'].'</td>';
                     $company_style .= '<td>'.$company_details['date_registered'].'</td>';
                     
-                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/companyprofile/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/viewcompany/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     
                     $company_style .= '</tr>';
                     $counter++;
@@ -233,7 +302,7 @@ class Admin extends MY_Controller {
                     $product_style .= '<td>'.$product_details['prod_company'].'</td>';
                     $product_style .= '<td>'.$product_details['date_added'].'</td>';
                     
-                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/productprofile/'.$product_details['prod_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/viewproduct/'.$product_details['prod_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'admin/updateproduct/delete/'.$product_details['prod_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     $product_style .= '</tr>';
                     $counter++;
@@ -265,7 +334,7 @@ class Admin extends MY_Controller {
                     $product_style .= '<td>'.$product_details['prod_company'].'</td>';
                     $product_style .= '<td>'.$product_details['date_added'].'</td>';
                     
-                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/productprofile/'.$product_details['prod_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/viewproduct/'.$product_details['prod_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Request again for the managers approval" href = "'.base_url().'admin/updateproduct/activate/'.$product_details['prod_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     $product_style .= '</tr>';
                     $counter++;
@@ -297,7 +366,7 @@ class Admin extends MY_Controller {
                     $product_style .= '<td>'.$product_details['prod_company'].'</td>';
                     $product_style .= '<td>'.$product_details['date_added'].'</td>';
                     
-                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/productprofile/'.$product_details['prod_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/viewproduct/'.$product_details['prod_id'].'"><i class="ion-eye icon black"></i></a></td>';
                     $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Restore Profile" href = "'.base_url().'admin/updateproduct/restore/'.$product_details['prod_id'].'"><i class="ion-trash-a icon black"></i></td>';
                     $product_style .= '</tr>';
                     $counter++;
@@ -478,8 +547,13 @@ class Admin extends MY_Controller {
 	{
 
 		$data['error'] = '';
-		
-		
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['productnumber']  = $this->getproductnumber();
 		$data['usernumber']  = $this->getusernumber();
@@ -497,6 +571,14 @@ class Admin extends MY_Controller {
 	public function tables()
 	{
 		$data['error'] = '';
+        
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['usernumber']  = $this->getusernumber();
 		$data['productnumber']  = $this->getproductnumber();
 		$data['messagenumber']  = $this->getmessagenumber();
@@ -551,6 +633,14 @@ class Admin extends MY_Controller {
 	public function forms()
 	{
 		$data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+
 		$data['product_categories']  = $this->getproductcategories();
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
@@ -566,9 +656,112 @@ class Admin extends MY_Controller {
 		$this->load->view('admin_form', $data);
 	}
 
+    function viewprofile($id)
+    {
+        $userdet = array();
+        $results = $this->admin_model->userprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['user'][] = $values;  
+        }
+
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+
+        $data['error'] = '';
+        $data['product_categories']  = $this->getproductcategories();
+        $data['messagenumber']  = $this->getmessagenumber();
+        $data['usernumber']  = $this->getusernumber();
+        $data['product_types']  = $this->getproducttypes();
+        $data['productnumber']  = $this->getproductnumber();
+        $data['companynumber']  = $this->getcompanynumber();
+        $data['user'] = $details;
+        $data['product_companies']  = $this->getproductcompanies();
+
+        $this->load->view('view_user', $data);
+ 
+    }
+
+    function viewcompany($id)
+    {
+        $userdet = array();
+        $results = $this->admin_model->companyprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['company'][] = $values;  
+        }
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+
+        $data['error'] = '';
+        $data['product_categories']  = $this->getproductcategories();
+        $data['messagenumber']  = $this->getmessagenumber();
+        $data['usernumber']  = $this->getusernumber();
+        $data['product_types']  = $this->getproducttypes();
+        $data['productnumber']  = $this->getproductnumber();
+        $data['companynumber']  = $this->getcompanynumber();
+        $data['company'] = $details;
+        $data['product_companies']  = $this->getproductcompanies();
+
+        $this->load->view('view_company', $data);
+ 
+    }
+
+    function viewproduct($id)
+    {
+        $userdet = array();
+        $results = $this->admin_model->productprofile($id);
+
+        foreach ($results as $key => $values) {
+            $details['product'][] = $values;  
+        }
+       // echo '<pre>';print_r($data['user']);echo '</pre>';die;
+        
+        $data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
+        $data['product_categories']  = $this->getproductcategories();
+        $data['messagenumber']  = $this->getmessagenumber();
+        $data['usernumber']  = $this->getusernumber();
+        $data['product_types']  = $this->getproducttypes();
+        $data['productnumber']  = $this->getproductnumber();
+        $data['companynumber']  = $this->getcompanynumber();
+        $data['product'] = $details;
+        $data['product_companies']  = $this->getproductcompanies();
+
+        $this->load->view('view_product', $data);
+ 
+    }
+
+  
+
 	public function delprod()
 	{
 		$data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['product_categories']  = $this->getproductcategories();
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
@@ -588,6 +781,13 @@ class Admin extends MY_Controller {
 	public function dprod()
 	{
 		$data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['product_categories']  = $this->getproductcategories();
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
@@ -607,6 +807,13 @@ class Admin extends MY_Controller {
 	public function users()
 	{
 		$data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
 		$data['productnumber']  = $this->getproductnumber();
@@ -622,6 +829,13 @@ class Admin extends MY_Controller {
 	public function dusers()
 	{
 		$data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
         $data['dusernumber']  = $this->getdusernumber();
@@ -638,6 +852,13 @@ class Admin extends MY_Controller {
 	public function company()
 	{
 		$data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
 		$data['productnumber']  = $this->getproductnumber();
@@ -653,6 +874,13 @@ class Admin extends MY_Controller {
 	public function dcompa()
 	{
 		$data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
 		$data['productnumber']  = $this->getproductnumber();
@@ -669,6 +897,13 @@ class Admin extends MY_Controller {
 	public function messages()
 	{
 		$data['error'] = '';
+        $oid = $this->session->userdata('ac_id');
+        $results = $this->admin_model->ownprofile($oid);
+
+        foreach ($results as $key => $values) {
+            $odetails['ownprofile'][] = $values;  
+        }
+        $data['ownprofile'] = $odetails;
 		$data['usernumber']  = $this->getusernumber();
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['companynumber']  = $this->getcompanynumber();
