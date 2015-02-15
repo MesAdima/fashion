@@ -33,6 +33,7 @@
 			<?php endif; ?> -->
 
 	  </td>
+	  <td class="remove"><?php echo anchor('cart/remove/'.$item['rowid'], 'X'); ?></td>
 	  <td style="text-align:right"><?php echo $this->cart->format_number($items['price']); ?></td>
 	  <td style="text-align:right">$<?php echo $this->cart->format_number($items['subtotal']); ?></td>
 	</tr>

@@ -49,7 +49,7 @@ class Home extends MY_Controller {
 	 public function add_to_cart_check($prod_id)
 	 {
       if($this->session->userdata('logged_in')){
-			redirect('cart');
+			redirect('cart/add_products/'.$prod_id);
       }
       else{
         redirect('user/log');

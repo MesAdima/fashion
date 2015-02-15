@@ -274,6 +274,7 @@
 						?>
 						
 							<?php if ($cart = $this->cart->contents()): ?>
+								<?php print_r($cart);exit; ?>
 						<div id = "cart">
 							<table>
 								<caption>

@@ -1,6 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Cart extends MY_Controller {
+	
+	function __construct()
+    {
+        // Call the Model constructor
+        parent::__construct();
+		$this->load->model('product_model');
+    }
 
 	public function index()
     {
@@ -18,14 +25,14 @@ class Cart extends MY_Controller {
 		echo "update() called";
 	} 
 	
-	public function add_products(){
-		$this->load->model('product_model');
-		$product = $this->product_model->get($this->input->post('prod_id'));
+	public function add_products($prod_id){
+		
+		$product = $this->product_model->get($prod_id);
 		
 		//echo "<pre>";print_r($product);echo "</pre>";exit;
 		
 		$insert = array(
-			'id' => $this->input->post('prod_id'),
+			'id' => $prod_id,
 			'qty' => 1,
 			'price' => $product->price,
 			'name' => $product->prod_name,
@@ -33,7 +40,7 @@ class Cart extends MY_Controller {
 		
 		$this->cart->insert($insert);
 		
-		redirect('products/view');
+		//redirect('products/view');
 		
 		
 		
