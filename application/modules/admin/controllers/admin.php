@@ -25,8 +25,12 @@ class Admin extends MY_Controller {
 
 	
 
-	function createusersview($type)
+	function createusersview($type,$status)
     {
+    	switch($status){
+
+    		case 'active':
+
         $users = $this->admin_model->get_all_users();
         $user_style = '';
         if ($users) {
@@ -57,14 +61,55 @@ class Admin extends MY_Controller {
                 # code...
                 break;
             }
-        }
+        }break;
+
+
+        case 'deactive':
+           $users = $this->admin_model->get_all_dusers();
+           $user_style = '';
+        if ($users) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($users as $key => $user_details) {
+                    $user_style .= '<tr>';
+                    // $user_style .= '<td>'.$counter.'</td>';
+                    $user_style .= '<td>'.$user_details['ac_id'].'</td>';
+                    $user_style .= '<td>'.$user_details['f_name'].'</td>';
+                    $user_style .= '<td>'.$user_details['l_name'].'</td>';
+                    $user_style .= '<td>'.$user_details['age'].'</td>';
+                    $user_style .= '<td>'.$user_details['nationality'].'</td>';
+                    $user_style .= '<td>'.$user_details['phone_no'].'</td>';
+                    $user_style .= '<td>'.$user_details['email'].'</td>';
+                    $user_style .= '<td>'.$user_details['residence'].'</td>';
+                    $user_style .= '<td>'.$user_details['religion'].'</td>';
+                    $user_style .= '<td>'.$user_details['gender'].'</td>';
+                    $user_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/userprofile/'.$user_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $user_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Activate Profile" href = "'.base_url().'admin/updateuser/activate/'.$user_details['ac_id'].'"><i class="ion-ios-play icon black"></i></td>';
+                    $user_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+            }
+        }break;
+
+    }
 
         return $user_style;
     }
 
 
-    function createcompaniesview($type)
+    function createcompaniesview($type,$status)
     {
+
+    	switch($status){
+
+    		case 'active':
+
         $companies = $this->admin_model->get_all_companies();
         $company_style = '';
         if ($companies) {
@@ -93,7 +138,41 @@ class Admin extends MY_Controller {
                 # code...
                 break;
             }
-        }
+        }break;
+
+        case 'deactive':
+
+        $companies = $this->admin_model->get_all_dcompanies();
+        $company_style = '';
+        if ($companies) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($companies as $key => $company_details) {
+                    $company_style .= '<tr>';
+                    // $user_style .= '<td>'.$counter.'</td>';
+                    $company_style .= '<td>'.$company_details['comp_id'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_name'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_location'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_address'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_pnumber'].'</td>';
+                    $company_style .= '<td>'.$company_details['company_email'].'</td>';
+                    $company_style .= '<td>'.$company_details['date_registered'].'</td>';
+                    
+                    $company_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/companyprofile/'.$company_details['comp_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    
+                    $company_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+            }
+        }break;
+
+    }
 
         return $company_style;
     }
@@ -131,8 +210,11 @@ class Admin extends MY_Controller {
         return $message_style;
     }
 
-    function createproductsview($type)
+    function createproductsview($type,$status)
     {
+    	switch($status){
+
+    		case 'active':
         $products = $this->admin_model->get_all_products();
         $product_style = '';
         if ($products) {
@@ -162,7 +244,73 @@ class Admin extends MY_Controller {
                 # code...
                 break;
             }
-        }
+        }break;
+
+       case 'deactive':
+         $products = $this->admin_model->get_all_dproducts();
+        $product_style = '';
+        if ($products) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($products as $key => $product_details) {
+                    $product_style .= '<tr>';
+                    // $user_style .= '<td>'.$counter.'</td>';
+                    $product_style .= '<td>'.$product_details['prod_id'].'</td>';
+                    $product_style .= '<td>'.$product_details['prod_name'].'</td>';
+                    $product_style .= '<td>'.$product_details['prod_type'].'</td>';
+                    $product_style .= '<td>'.$product_details['prod_cat'].'</td>';
+                    $product_style .= '<td>'.$product_details['quantity'].'</td>';
+                    $product_style .= '<td>'.$product_details['price'].'</td>';
+                    $product_style .= '<td>'.$product_details['prod_company'].'</td>';
+                    $product_style .= '<td>'.$product_details['date_added'].'</td>';
+                    
+                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/productprofile/'.$product_details['prod_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Request again for the managers approval" href = "'.base_url().'admin/updateproduct/activate/'.$product_details['prod_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    $product_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+            }
+        }break;
+
+        case 'deleted':
+         $products = $this->admin_model->get_all_delproducts();
+        $product_style = '';
+        if ($products) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($products as $key => $product_details) {
+                    $product_style .= '<tr>';
+                    // $user_style .= '<td>'.$counter.'</td>';
+                    $product_style .= '<td>'.$product_details['prod_id'].'</td>';
+                    $product_style .= '<td>'.$product_details['prod_name'].'</td>';
+                    $product_style .= '<td>'.$product_details['prod_type'].'</td>';
+                    $product_style .= '<td>'.$product_details['prod_cat'].'</td>';
+                    $product_style .= '<td>'.$product_details['quantity'].'</td>';
+                    $product_style .= '<td>'.$product_details['price'].'</td>';
+                    $product_style .= '<td>'.$product_details['prod_company'].'</td>';
+                    $product_style .= '<td>'.$product_details['date_added'].'</td>';
+                    
+                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/productprofile/'.$product_details['prod_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $product_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Restore Profile" href = "'.base_url().'admin/updateproduct/restore/'.$product_details['prod_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    $product_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+            }
+        }break;
+
+    }
 
         return $product_style;
     }
@@ -232,6 +380,10 @@ class Admin extends MY_Controller {
 				case 'delete':
 					redirect(base_url() .'admin/home');
 					break;
+
+				case 'activate':
+					redirect(base_url() .'admin/dusers');
+					break;
 				
 				default:
 					# code...
@@ -239,6 +391,8 @@ class Admin extends MY_Controller {
 			}
 		}
 	}
+
+
 
 	
 
@@ -250,6 +404,14 @@ class Admin extends MY_Controller {
 			switch ($type) {
 				case 'delete':
 					redirect(base_url() .'admin/home');
+					break;
+
+				case 'restore':
+					redirect(base_url() .'admin/forms');
+					break;
+
+				case 'activate':
+					redirect(base_url() .'admin/dprod');
 					break;
 				
 				default:
@@ -322,9 +484,9 @@ class Admin extends MY_Controller {
 		$data['productnumber']  = $this->getproductnumber();
 		$data['usernumber']  = $this->getusernumber();
 		$data['companynumber']  = $this->getcompanynumber();
-		$data['product_table'] = $this->createproductsview('table');
-		$data['users_table'] = $this->createusersview('table');
-		$data['companies_table'] = $this->createcompaniesview('table');
+		$data['product_table'] = $this->createproductsview('table','active');
+		$data['users_table'] = $this->createusersview('table','active');
+		$data['companies_table'] = $this->createcompaniesview('table','active');
 
 		
 
@@ -339,10 +501,10 @@ class Admin extends MY_Controller {
 		$data['productnumber']  = $this->getproductnumber();
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['companynumber']  = $this->getcompanynumber();
-		$data['users_table'] = $this->createusersview('table');
-		$data['product_table'] = $this->createproductsview('table');
+		$data['users_table'] = $this->createusersview('table','active');
+		$data['product_table'] = $this->createproductsview('table','active');
 		$data['messages_table'] = $this->createmessagesview('table');
-		$data['companies_table'] = $this->createcompaniesview('table');
+		$data['companies_table'] = $this->createcompaniesview('table','active');
 
 
 		
@@ -395,7 +557,7 @@ class Admin extends MY_Controller {
 		$data['product_types']  = $this->getproducttypes();
 		$data['productnumber']  = $this->getproductnumber();
 		$data['companynumber']  = $this->getcompanynumber();
-		$data['product_table'] = $this->createproductsview('table');
+		$data['product_table'] = $this->createproductsview('table','active');
 		$data['product_companies']  = $this->getproductcompanies();
 		// $data['content_page'] = 'admin/admin_form';
 		// $this->template->get_admin_template($data);
@@ -404,13 +566,51 @@ class Admin extends MY_Controller {
 		$this->load->view('admin_form', $data);
 	}
 
+	public function delprod()
+	{
+		$data['error'] = '';
+		$data['product_categories']  = $this->getproductcategories();
+		$data['messagenumber']  = $this->getmessagenumber();
+		$data['usernumber']  = $this->getusernumber();
+		$data['product_types']  = $this->getproducttypes();
+		$data['productnumber']  = $this->getproductnumber();
+        $data['delproductnumber']  = $this->getdelproductnumber();
+		$data['companynumber']  = $this->getcompanynumber();
+		$data['product_table'] = $this->createproductsview('table','deleted');
+		$data['product_companies']  = $this->getproductcompanies();
+		// $data['content_page'] = 'admin/admin_form';
+		// $this->template->get_admin_template($data);
+		//$this->load->view('admin_form', array('logged_in' => $this->logged_in));
+
+		$this->load->view('admin_dproduct', $data);
+	}
+
+	public function dprod()
+	{
+		$data['error'] = '';
+		$data['product_categories']  = $this->getproductcategories();
+		$data['messagenumber']  = $this->getmessagenumber();
+		$data['usernumber']  = $this->getusernumber();
+		$data['product_types']  = $this->getproducttypes();
+		$data['productnumber']  = $this->getproductnumber();
+        $data['dproductnumber']  = $this->getdproductnumber();
+		$data['companynumber']  = $this->getcompanynumber();
+		$data['product_table'] = $this->createproductsview('table','deactive');
+		$data['product_companies']  = $this->getproductcompanies();
+		// $data['content_page'] = 'admin/admin_form';
+		// $this->template->get_admin_template($data);
+		//$this->load->view('admin_form', array('logged_in' => $this->logged_in));
+
+		$this->load->view('admin_disapproved', $data);
+	}
+
 	public function users()
 	{
 		$data['error'] = '';
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
 		$data['productnumber']  = $this->getproductnumber();
-		$data['users_table'] = $this->createusersview('table');
+		$data['users_table'] = $this->createusersview('table','active');
 		$data['companynumber']  = $this->getcompanynumber();
 		// $data['content_page'] = 'admin/admin_user';
 		// $this->template->get_admin_template($data);
@@ -419,19 +619,51 @@ class Admin extends MY_Controller {
 		$this->load->view('admin_users', $data);
 	}
 
+	public function dusers()
+	{
+		$data['error'] = '';
+		$data['messagenumber']  = $this->getmessagenumber();
+		$data['usernumber']  = $this->getusernumber();
+        $data['dusernumber']  = $this->getdusernumber();
+		$data['productnumber']  = $this->getproductnumber();
+		$data['users_table'] = $this->createusersview('table','deactive');
+		$data['companynumber']  = $this->getcompanynumber();
+		// $data['content_page'] = 'admin/admin_user';
+		// $this->template->get_admin_template($data);
+		//$this->load->view('admin_user', array('logged_in' => $this->logged_in));
+
+		$this->load->view('admin_duser', $data);
+	}
+
 	public function company()
 	{
 		$data['error'] = '';
 		$data['messagenumber']  = $this->getmessagenumber();
 		$data['usernumber']  = $this->getusernumber();
 		$data['productnumber']  = $this->getproductnumber();
-		$data['companies_table'] = $this->createcompaniesview('table');
+		$data['companies_table'] = $this->createcompaniesview('table','active');
 		$data['companynumber']  = $this->getcompanynumber();
 		// $data['content_page'] = 'admin/admin_user';
 		// $this->template->get_admin_template($data);
 		//$this->load->view('admin_user', array('logged_in' => $this->logged_in));
 
 		$this->load->view('admin_company', $data);
+	}
+
+	public function dcompa()
+	{
+		$data['error'] = '';
+		$data['messagenumber']  = $this->getmessagenumber();
+		$data['usernumber']  = $this->getusernumber();
+		$data['productnumber']  = $this->getproductnumber();
+		$data['companies_table'] = $this->createcompaniesview('table','deactive');
+		$data['companynumber']  = $this->getcompanynumber();
+        $data['dcompanynumber']  = $this->getdcompanynumber();
+		// $data['content_page'] = 'admin/admin_user';
+		// $this->template->get_admin_template($data);
+		//$this->load->view('admin_user', array('logged_in' => $this->logged_in));
+
+		$this->load->view('admin_dcompany', $data);
 	}
 
 	public function messages()
@@ -459,6 +691,15 @@ class Admin extends MY_Controller {
           //echo '<pre>'; print_r($results); echo '</pre>';die;
 	}
 
+    public function getdusernumber()
+    {
+          $results = $this->admin_model->dusernumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+    }
+
 	public function getmessagenumber()
 	{
           $results = $this->admin_model->messagenumber();
@@ -477,6 +718,15 @@ class Admin extends MY_Controller {
           //echo '<pre>'; print_r($results); echo '</pre>';die;
 	}
 
+    public function getdcompanynumber()
+    {
+          $results = $this->admin_model->dcompanynumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+    }
+
 	public function getproductnumber()
 	{
           $results = $this->admin_model->productnumber();
@@ -485,6 +735,24 @@ class Admin extends MY_Controller {
 
           //echo '<pre>'; print_r($results); echo '</pre>';die;
 	}
+
+    public function getdproductnumber()
+    {
+          $results = $this->admin_model->dproductnumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+    }
+
+    public function getdelproductnumber()
+    {
+          $results = $this->admin_model->delproductnumber();
+
+          return $results;
+
+          //echo '<pre>'; print_r($results); echo '</pre>';die;
+    }
 
 	
 	

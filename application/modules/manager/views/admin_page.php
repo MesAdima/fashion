@@ -18,7 +18,7 @@
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-       <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'; ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/script/jquery/jquery-ui.js'; ?>"></script>
 
         <script src="<?php echo base_url(). 'assets/vendors/modernizr-2.6.2-respond-1.1.0.min.js'?>"></script>
@@ -119,7 +119,7 @@
             </div>
         </div>
 
-
+     
 
 
         <div class="container-fluid">
@@ -159,23 +159,23 @@
                     
                     <div class="row-fluid addlength">
                         <!-- <div class="alert alert-success">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4>Success</h4>
-                        	Logged in succesfully</div> -->
-                        	<div class="navbar">
-                            	<div class="navbar-inner">
-	                                <ul class="breadcrumb">
-	                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-	                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
-	                                    <li>
-	                                        <a href="#">Dashboard</a> <span class="divider">|</span>	
-	                                    </li>
-	                                    
-	                                    <li class="active">Types</li>
-	                                </ul>
-                            	</div>
-                        	</div>
-                    	</div>
+                          Logged in succesfully</div> -->
+                          <div class="navbar">
+                              <div class="navbar-inner">
+                                  <ul class="breadcrumb">
+                                      <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                      <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                      <li>
+                                          <a href="#">Dashboard</a> <span class="divider">|</span>  
+                                      </li>
+                                      
+                                      <li class="active">Administrator</li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
 
                       
 
@@ -187,50 +187,140 @@
                          <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">New Type</div>
+                                <div class="muted pull-left">New Administrator</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-					<!-- BEGIN FORM-->
-					<form enctype="multipart/form-data" method="POST" action="<?php echo base_url() . 'manager/create_type'?>" class="form-horizontal black" role="form">
-						<?php 
-                                  echo form_open_multipart(base_url().'manager/create_type');
+          <!-- BEGIN FORM-->
+          <form enctype="multipart/form-data" method="POST" action="<?php echo base_url() . 'manager/create_admin'?>" class="form-horizontal black" role="form">
+            <?php 
+                                  echo form_open_multipart(base_url().'manager/create_admin');
                               ?>
                         <fieldset>
-							<div class="alert alert-error hide">
-								<button class="close" data-dismiss="alert"></button>
-								Please complete filling the form
-							</div>
-							<div class="alert alert-success hide">
-								<button class="close" data-dismiss="alert"></button>
-								Product has been added successfully
-							</div>
+              <div class="alert alert-error hide">
+                <button class="close" data-dismiss="alert"></button>
+                Please complete filling the form
+              </div>
+              <div class="alert alert-success hide">
+                <button class="close" data-dismiss="alert"></button>
+                Administrator has been added successfully
+              </div>
 
-  							<div class="control-group">
-  								<label class="control-label">Type Name<span class="required">*</span></label>
-  								<div class="controls">
-  									<input type="text" name="typename" data-required="1" required value="<?php echo set_value('typename'); ?>" class="span6 m-wrap form-control"/>
-  								</div>
-  							</div>
+                <div class="control-group">
+                  <label class="control-label">First Name<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="firstname" data-required="1" required value="<?php echo set_value('firstname'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
 
-  							
-  							
-  						
-  							<div class="form-actions">
-  								<button type="submit" class="btn btn-primary">Enter Type</button>
-  								<button type="reset" class="btn">Cancel</button>
-  							</div>
-						</fieldset>
+                <div class="control-group">
+                  <label class="control-label">Middle Name<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="middlename" data-required="1" required value="<?php echo set_value('middlename'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Last Name<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="lastname" data-required="1" required value="<?php echo set_value('lastname'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Picture<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="file" id="picture" name="picture" data-required="1" required value="<?php echo set_value('picture'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Age<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="age" data-required="1" required value="<?php echo set_value('age'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Nationality<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="nationality" data-required="1" required value="<?php echo set_value('nationality'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Phone Number<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="phonenumber" data-required="1" required value="<?php echo set_value('phonenumber'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Email<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="email" data-required="1" required value="<?php echo set_value('email'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Residence<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="residence" data-required="1" required value="<?php echo set_value('residence'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Gender<span class="required">*</span></label>
+                  <div class="controls">
+                                    <select name="gender" type="text" required value="<?php echo set_value('gender'); ?>" class="span6 m-wrap form-control">
+                                       <option selected="selected">Select the gender</option>
+                                       <option value="Male">Male</option>
+                                       <option value="Female">Female</option>
+                                    </select>
+                    
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">User Name<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="text" name="username" data-required="1" required value="<?php echo set_value('username'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Password<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="password" name="pass1" data-required="1" required value="<?php echo set_value('pass1'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Re-Enter Password<span class="required">*</span></label>
+                  <div class="controls">
+                    <input type="password" name="pass2" data-required="1" required value="<?php echo set_value('pass2'); ?>" class="span6 m-wrap form-control"/>
+                  </div>
+                </div>
+
+
+
+                
+              
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Enter Admin</button>
+                  <button type="reset" class="btn">Cancel</button>
+                </div>
+            </fieldset>
                         <?php 
                                     echo form_close();
                                  ?>
-					</form>
-					<!-- END FORM-->
-				</div>
-			    </div>
-			</div>
+          </form>
+          <!-- END FORM-->
+        </div>
+          </div>
+      </div>
                      
-		    </div>
+        </div>
 
 
 
@@ -239,29 +329,36 @@
                    <div class="row-fluid addlength">
                         <div class="span12">
                             <!-- block -->
-                             <div class="block">
+                            <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Types</div>
-                                    <div class="pull-right"><span class="badge badge-info"><?php echo $typenumber?></span>
+                                    <div class="muted pull-left">Administrators</div>
+                                    <div class="pull-right"><span class="badge badge-info"><?php echo $adminnumber?></span>
 
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
                                     <div class="table-responsive">
-          
-                                    <table class="table table-striped datatable" id="typetable">
+                                    <table class="table table-striped datatable" id="companytable">
                                         <thead>
 
 
                                             <tr>
                                                 <th>#</th>
-                                                <th>Type Name</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Age</th>
+                                                <th>Nationality</th>
+                                                <th>Phone Number</th>
+                                                <th>Email</th>
+                                                <th>Residence</th>
+                                                <th>Religion</th>
+                                                <th>Gender</th>
                                                 <th>View</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php echo $types_table; ?>
+                                            <?php echo $admin_table; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -310,7 +407,7 @@
         });
         </script>
         <script type="text/javascript">
-            $('#typetable').dataTable();
+            $('#companytable').dataTable();
             $('.dataTables_filter input').addClass('form-control').attr('placeholder','Search');
             $('.dataTables_length select').addClass('form-control');
         </script>

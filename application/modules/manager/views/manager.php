@@ -82,22 +82,11 @@
                                     <!-- <li class="divider"></li> -->
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Content <i class="caret"></i>
-
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/tables'?>">Tables</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/news'?>">News</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/messages'?>">Messages</a>
-                                    </li>
-                                    
-                                </ul>
+                            <li>
+                                <a  href="<?php echo base_url(). 'manager/messages'?>">Messages</a>
+                            </li>
+                            <li>
+                                <a  href="<?php echo base_url(). 'manager/admin'?>">Admins</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Deactivations<i class="caret"></i>
@@ -105,14 +94,22 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dusers'?>">User List</a>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dtype'?>">Type List</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dcompa'?>">Companies List</a>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dcat'?>">Category List</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dmang'?>">Manager List</a>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dcomp'?>">Company List</a>
                                     </li>
+                                    <li>
+                                        <div class="divider"></div>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dadmin'?>">Admin List</a>
+                                    </li>
+                                </ul>
+                            </li>
                                 </ul>
                             </li>
                         </ul>
@@ -122,29 +119,7 @@
             </div>
         </div>
 
-        <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button> -->
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+    
 
 
         <div class="container-fluid">

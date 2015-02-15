@@ -90,9 +90,7 @@
                                     <li>
                                         <a tabindex="-1" href="<?php echo base_url(). 'admin/tables'?>">Tables</a>
                                     </li>
-                                    <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'admin/news'?>">News</a>
-                                    </li>
+                                    
                                     <li>
                                         <a tabindex="-1" href="<?php echo base_url(). 'admin/messages'?>">Messages</a>
                                     </li>
@@ -111,7 +109,13 @@
                                         <a tabindex="-1" href="<?php echo base_url(). 'admin/dcompa'?>">Companies List</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'admin/dmang'?>">Manager List</a>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'admin/delprod'?>">Product List</a>
+                                    </li>
+                                    <li>
+                                        <div class="divider"></div>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'admin/dprod'?>">Disapprovals</a>
                                     </li>
                                 </ul>
                             </li>
@@ -157,9 +161,7 @@
                         <li>
                             <a href="<?php echo base_url(). 'admin/forms'?>"><span class="badge badge-alert pull-right"><?php echo $productnumber?></span> Product Form</a>
                         </li>
-                       <!--  <li>
-                            <a href="<?php echo base_url(). 'admin/statistics'?>"><i class="icon-chevron-right"></i> Statistics (Charts)</a>
-                        </li> -->
+                       
                         <li>
                             <a href="<?php echo base_url(). 'admin/messages'?>"><span class="badge badge-warning pull-right"><?php echo $messagenumber?></span> Messages</a>
                         </li>

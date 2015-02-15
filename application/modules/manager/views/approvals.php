@@ -5,6 +5,7 @@
 
       				<?php
        if(isset($approve_message)){ 
+       	//echo $approve_message;
        	 if($approve_message=='approve'){   ?>
 
             <div style="background-color:#2ecc71;" class="well well-sm success"><center><h4>Product has been approved</h4></center></div>
@@ -19,7 +20,7 @@
 
        ?>
 
-            <div style="background-color:#e74c3c;" class="well well-sm alert"><center><h4>Problem with updating product. Please contact administrator</h4></center></div>
+            <div style="background-color:#e74c3c;" class="well well-sm warning"><center><h4>Problem with updating product. Please contact administrator</h4></center></div>
    <?php
                }
        }else{
@@ -42,8 +43,8 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-											<span class="badge pull-right"><i class=""></i></span>
+										<a href="#">
+											<span class="badge pull-right"><i class="active"></i></span>
 											Product Approvals
 										</a>
 									</h4>
@@ -53,9 +54,9 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
+										<a href="<?php echo base_url(). 'manager/admin'?>">
 											<span class="badge pull-right"><i class=""></i></span>
-											New users
+											New Admin
 										</a>
 									</h4>
 								</div>
@@ -113,9 +114,8 @@
 										<h2><?php echo $data['price']; ?></h2>
 										<p><?php echo $data['prod_name']; ?></p>
 										<p><?php echo $data['prod_company']; ?></p>
-										<p><?php echo $data['prod_cat']; ?></p>
-										<p><?php echo $data['prod_type']; ?></p>
-										<a href="<?php base_url().'manager/updateproduct/approve/'.$data['prod_id'] ?>" style="background-color:#2ecc71" class="btn btn-default">Approve</a> <a href="<?php base_url().'manager/updateproduct/disapprove/'.$data['prod_id'] ?>" style="background-color:#e74c3c" class="btn btn-default">Disapprove</a>
+										
+										<a href="<?php echo base_url().'manager/updateproduct/approve/'.$data['prod_id'] ?>" style="background-color:#2ecc71" class="btn btn-default">Approve</a> <a href="<?php echo base_url().'manager/updateproduct/disapprove/'.$data['prod_id'] ?>" style="background-color:#e74c3c" class="btn btn-default">Disapprove</a>
 									</div>
 									
 								</div>

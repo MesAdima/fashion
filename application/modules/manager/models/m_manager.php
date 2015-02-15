@@ -12,6 +12,7 @@ class M_manager extends MY_Model {
     public function get_waiting_products()
   {
     $products = array();
+    $this->db->order_by("prod_id", "asc");
     $query = $this->db->get_where('products', array('is_deleted' => 0, 'approved' => 2));
     $result = $query->result_array();
 
@@ -28,8 +29,113 @@ class M_manager extends MY_Model {
   }
 
 
+
+    public function enter_admin($path){
+      $firstname = strtoupper($this->input->post('firstname'));
+      $middlename = strtoupper($this->input->post('middlename'));
+      $lastname = strtoupper($this->input->post('lastname'));
+      $filename = $this->input->post('picture');
+      $pnumber = $this->input->post('phonenumber');
+      $gender = strtoupper($this->input->post('gender'));
+      $nationality = strtoupper($this->input->post('nationality'));
+      $age = $this->input->post('age');
+      $religion = strtoupper($this->input->post('religion'));
+      $residence = strtoupper($this->input->post('residence'));
+      $username = $this->input->post('username');
+      $passw1 = md5($this->input->post('pass1'));
+      
+      $email = $this->input->post('email');
+
+      $member_details_data = array();
+      $member_details = array(
+          'f_name' => $firstname,
+          'm_name' => $middlename,
+          'l_name' => $lastname,
+          'picture' => $path,
+          'age' => $age,
+          'nationality' => $nationality,
+          'phone_no' => $pnumber,
+          'email' => $email,
+          'residence' => $residence,
+          'religion' => $religion,
+          'gender' => $gender
+      );
+
+        
+
+        array_push($member_details_data, $member_details);
+
+        //echo '<pre>'; print_r($member_details_data); echo '<pre>'; die;
+
+        $this->db->insert_batch('accounts',$member_details_data);
+
+      $member_credentials_data = array();
+      $member_credentials = array(
+          'username' => $username,
+          'password' => $passw1,
+          'lt_id' => 3
+      );
+
+      array_push($member_credentials_data, $member_credentials);
+
+      $this->db->insert_batch('logs',$member_credentials_data);
+       
+
+      if($this->db->affected_rows() === 1){
+
+        return $username;
+
+      }else{
+
+      $subject = 'Member Entry';
+      $message = 'Problem in registering User Name '.$username.' . Please rectify immediatelly';
+
+      $message_details_data = array();
+      $message_details = array(
+          'subject' => $subject,
+          'message' => $message
+      );
+
+        
+
+        array_push($message_details_data, $message_details);
+
+        //echo '<pre>'; print_r($member_details_data); echo '<pre>'; die;
+
+        $this->db->insert_batch('mail',$message_details_data);
+
+        //echo 'Applicant is not able to be registered';
+        $this->load->library('email');
+        $this->email->from('info@marewill.com','MareWill Fashion');
+        $this->email->to('marekawilly@marewill.com','marekawilly@gmail.com');
+        $this->email->subject('Failed registeration of a user');
+
+        if(isset($email)){
+            $this->email->message('Unable to register and insert user with the email of '.$email.' to the database.');
+        }else{
+            $this->email->message('Unable to register and insert user to the database.');
+
+        }
+
+        $this->email->send();
+        return FALSE;
+     }
+    }
+  
+
+
     public function usernumber(){
     $sql = "SELECT COUNT(`ac_id`) as users FROM accounts WHERE `is_deleted` = 0";
+
+        $result = $this->db->query($sql);
+        $data = $result->row();
+        //echo $data->users;die();
+
+        return $data->users;
+   }
+
+   public function adminnumber(){
+    $sql = "SELECT COUNT(ac.ac_id) as users FROM accounts ac, logs l WHERE ac.is_deleted = 0 AND l.lt_id=ac.ac_id AND l.lt_id = 3 ";
 
         $result = $this->db->query($sql);
         $data = $result->row();
@@ -163,6 +269,27 @@ class M_manager extends MY_Model {
     return $companies;
   }
 
+  public function get_all_admins()
+  {
+    $admin = array();
+    
+    $this->db->join('logs', 'accounts.ac_id = logs.log_id');
+    $query = $this->db->get_where('accounts',array('lt_id' => 3, 'is_deleted' => 0));
+
+    $result = $query->result_array();
+
+    if ($result) {
+      foreach ($result as $key => $value) {
+        $admin[$value['ac_id']] = $value;
+      }
+      //echo '<pre>';print_r($admin);echo '</pre>';die();
+      
+      return $admin;
+    }
+    
+    return $admin;
+  }
+
   public function get_all_types()
   {
     $types = array();
@@ -290,7 +417,7 @@ class M_manager extends MY_Model {
     $data = array();
     switch ($type) {
       case 'delete':
-        $data['is_deleted'] = 0; 
+        $data['is_deleted'] = 1; 
         
         break;
       
@@ -342,8 +469,8 @@ class M_manager extends MY_Model {
 
       $mail_to_admin = array();
       $mail_admin = array(
-          'mm_subject' => $subject,
-          'mm_message' => $message
+          'subject' => $subject,
+          'message' => $message
         );
 
       array_push($mail_to_admin, $mail_admin);
@@ -359,8 +486,8 @@ class M_manager extends MY_Model {
 
       $mail_to_admin = array();
       $mail_admin = array(
-          'mm_subject' => $subject,
-          'mm_message' => $message
+          'subject' => $subject,
+          'message' => $message
         );
 
       array_push($mail_to_admin, $mail_admin);

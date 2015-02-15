@@ -75,9 +75,7 @@
                                     <li>
                                         <a tabindex="-1" href="<?php echo base_url(). 'admin/tables'?>">Tables</a>
                                     </li>
-                                    <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'admin/news'?>">News</a>
-                                    </li>
+                                    
                                     <li>
                                         <a tabindex="-1" href="<?php echo base_url(). 'admin/messages'?>">Messages</a>
                                     </li>
@@ -96,7 +94,13 @@
                                         <a tabindex="-1" href="<?php echo base_url(). 'admin/dcompa'?>">Companies List</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'admin/dmang'?>">Manager List</a>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'admin/delprod'?>">Product List</a>
+                                    </li>
+                                    <li>
+                                        <div class="divider"></div>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'admin/dprod'?>">Disapprovals</a>
                                     </li>
                                 </ul>
                             </li>

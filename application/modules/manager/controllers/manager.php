@@ -53,7 +53,7 @@ class Manager extends MY_Controller {
                 $counter = 1;
                 foreach ($companies as $key => $company_details) {
                     $company_style .= '<tr>';
-                    // $user_style .= '<td>'.$counter.'</td>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
                     $company_style .= '<td>'.$company_details['comp_id'].'</td>';
                     $company_style .= '<td>'.$company_details['company_name'].'</td>';
                     $company_style .= '<td>'.$company_details['company_location'].'</td>';
@@ -78,6 +78,45 @@ class Manager extends MY_Controller {
         return $company_style;
     }
 
+
+    function createadminsview($type)
+    {
+         $admins = $this->m_manager->get_all_admins();
+        $admin_style = '';
+        if ($admins) {
+            switch ($type) {
+            case 'table':
+                $counter = 1;
+                foreach ($admins as $key => $admin_details) {
+                    $admin_style .= '<tr>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
+                    $admin_style .= '<td>'.$admin_details['ac_id'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['f_name'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['l_name'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['age'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['nationality'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['phone_no'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['email'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['residence'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['religion'].'</td>';
+                    $admin_style .= '<td>'.$admin_details['gender'].'</td>';
+                    $admin_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'admin/adminprofile/'.$admin_details['ac_id'].'"><i class="ion-eye icon black"></i></a></td>';
+                    $admin_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="Delete Profile" href = "'.base_url().'admin/updateadmin/delete/'.$admin_details['ac_id'].'"><i class="ion-trash-a icon black"></i></td>';
+                    $admin_style .= '</tr>';
+                    $counter++;
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+            }
+        }
+
+        return $admin_style;
+      }
+
+
     function createproductsview($type)
     {
         $products = $this->m_manager->get_all_products();
@@ -88,7 +127,7 @@ class Manager extends MY_Controller {
                 $counter = 1;
                 foreach ($products as $key => $product_details) {
                     $product_style .= '<tr>';
-                    // $user_style .= '<td>'.$counter.'</td>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
                     $product_style .= '<td>'.$product_details['prod_id'].'</td>';
                     $product_style .= '<td>'.$product_details['prod_name'].'</td>';
                     $product_style .= '<td>'.$product_details['prod_type'].'</td>';
@@ -123,7 +162,7 @@ class Manager extends MY_Controller {
                 $counter = 1;
                 foreach ($messages as $key => $message_details) {
                     $message_style .= '<tr>';
-                    // $user_style .= '<td>'.$counter.'</td>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
                     $message_style .= '<td>'.$message_details['mm_id'].'</td>';
                     $message_style .= '<td>'.$message_details['mm_subject'].'</td>';
                     $message_style .= '<td>'.$message_details['mm_message'].'</td>';
@@ -155,7 +194,7 @@ class Manager extends MY_Controller {
                 $counter = 1;
                 foreach ($categories as $key => $category_details) {
                     $category_style .= '<tr>';
-                    // $user_style .= '<td>'.$counter.'</td>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
                     $category_style .= '<td>'.$category_details['cat_id'].'</td>';
                     $category_style .= '<td>'.$category_details['cat_name'].'</td>';
                     $category_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/categoryprofile/'.$category_details['cat_id'].'"><i class="ion-eye icon black"></i></a></td>';
@@ -184,7 +223,7 @@ class Manager extends MY_Controller {
                 $counter = 1;
                 foreach ($types as $key => $typ_details) {
                     $typ_style .= '<tr>';
-                    // $user_style .= '<td>'.$counter.'</td>';
+                    // $admin_style .= '<td>'.$counter.'</td>';
                     $typ_style .= '<td>'.$typ_details['type_id'].'</td>';
                     $typ_style .= '<td>'.$typ_details['type_name'].'</td>';
                     $typ_style .= '<td><a data-toggle="tooltip" data-placement="bottom" title="View Profile" href = "'.base_url().'manager/categoryprofile/'.$typ_details['type_id'].'"><i class="ion-eye icon black"></i></a></td>';
@@ -262,7 +301,7 @@ class Manager extends MY_Controller {
     {
       switch ($type) {
         case 'delete':
-          redirect(base_url() .'manager/home');
+          redirect(base_url() .'manager/messages');
           break;
         
         default:
@@ -275,30 +314,29 @@ class Manager extends MY_Controller {
   function updateproduct($type, $prod_id)
   {
 
-    echo "Getting";
     //print_r($prod_id);die();
-    // $update = $this->m_manager->updateproduct($type, $prod_id);
-    // if($update)
-    // {
-    //   //print_r($update);die();
-    //   switch ($type) {
-    //     case 'approve':
-    //       $message['approve_message'] = 'approve';
-    //       redirect(base_url() .'manager/approvals/'.$message);
-    //       break;
+    $update = $this->m_manager->updateproduct($type, $prod_id);
+    if($update)
+    {
+      //print_r($update);die();
+      switch ($type) {
+        case 'approve':
+         
+          redirect(base_url() .'manager/approvals/'.$type);
+          break;
 
-    //     case 'disapprove':
-    //       $message['approve_message'] = 'disapprove';
-    //       redirect(base_url() .'manager/approvals/'.$message);
-    //       break;
+        case 'disapprove':
+         
+          redirect(base_url() .'manager/approvals/'.$type);
+          break;
         
-    //     default:
-    //       # code...
-    //       break;
-    //   }
-    // }else{
-    //   //echo "Problem";
-    // }
+        default:
+          # code...
+          break;
+      }
+    }else{
+      //echo "Problem";
+    }
   }
 
 
@@ -330,6 +368,65 @@ class Manager extends MY_Controller {
         }
         }
        
+  }
+
+
+  function create_admin()
+  {
+    $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|min_length[2]|required|xss_clean');
+        $this->form_validation->set_rules('middlename', 'Middle Name', 'trim|min_length[2]|xss_clean');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|min_length[2]|required|xss_clean');
+        $this->form_validation->set_rules('phonenumber', 'Phone Number', 'trim|min_length[3]');
+        $this->form_validation->set_rules('age', 'Age', 'trim|min_length[2]');
+        $this->form_validation->set_rules('residence', 'Residence', 'trim|min_length[2]|xss_clean');
+        $this->form_validation->set_rules('nationality', 'Nationality', 'trim|min_length[3]|required|xss_clean');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|xss_clean|is_unique[accounts.email]');
+        $this->form_validation->set_rules('pass1', 'Password', 'trim|min_length[3]|max_length[15]|required|xss_clean');
+        $this->form_validation->set_rules('username', 'User Name', 'trim|min_length[3]|required|xss_clean|is_unique[logs.username]');
+        $this->form_validation->set_rules('pass2', 'Re-Entered Password', 'trim|required|matches[pass1]|xss_clean');
+
+    if($this->form_validation->run() == FALSE){
+      echo 'Not working';die();
+      redirect(base_url() .'manager/admin');
+        
+    }else{
+       //echo 'Not working';die();
+       //var_dump(realpath('application/modules/user'));
+      $path = base_url().'uploads/users/';
+           $config['upload_path'] = 'uploads/users/';
+           $config['allowed_types'] = 'jpeg|jpg|png|gif';
+           $config['encrypt_name'] = TRUE;
+           $this->load->library('upload', $config);
+           $this->upload->initialize($config);
+
+      if ( ! $this->upload->do_upload('picture'))
+        {
+         $error = array('error' => $this->upload->display_errors());
+
+         print_r($error);die;
+        }
+         else
+         {
+           
+                $data = array('upload_data' => $this->upload->data());
+           foreach ($data as $key => $value) {
+          //print_r($data);die;
+          $path = base_url().'uploads/users/'.$value['file_name'];
+        
+                  }
+          $result = $this->m_manager->enter_admin($path);
+               //print_r($result);die();
+
+        if($result){
+                 redirect(base_url() .'manager/admin');
+
+          }else{
+                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+        }
+        }
+       }
   }
 
 
@@ -386,15 +483,17 @@ class Manager extends MY_Controller {
                 redirect(base_url() .'manager/type');
 
           }else{
-                 echo 'There was a problem with the website.<br/>Please contact the administrator';
+                 echo 'There was a problem with the Type module.<br/>Please contact the administrator';
         }
         }
        
   }
 
-  public function getusernumber()
+  
+
+  public function getadminnumber()
   {
-          $results = $this->m_manager->usernumber();
+          $results = $this->m_manager->adminnumber();
 
           return $results;
 
@@ -500,10 +599,11 @@ class Manager extends MY_Controller {
       
    }
 
-   function approvals($message=NULL)
+   function approvals($type=NULL)
    {
     $data['error'] = '';
-    $data['approve_message'] = $message;
+    //echo '<pre>';print_r($message);echo'</pre>';die();
+    $data['approve_message'] = $type;
     $data['waits'] = $this->choosewaits();
 
     $this->load->view('approve_header', array('logged_in' => $this->logged_in));  
@@ -557,6 +657,25 @@ class Manager extends MY_Controller {
     $this->load->view('type_form',$data);
       
    }
+
+   function admin()
+   {
+      
+    $data['error'] = '';
+    
+    
+    $data['messagenumber']  = $this->getmessagenumber();
+    $data['productnumber']  = $this->getproductnumber();
+    $data['categorynumber']  = $this->getcategorynumber();
+    $data['typenumber']  = $this->gettypenumber();
+    $data['adminnumber']  = $this->getadminnumber();
+    $data['companynumber']  = $this->getcompanynumber();
+    $data['admin_table'] = $this->createadminsview('table');
+    
+
+    $this->load->view('admin_page', $data);
+      
+   } 
 
    function company()
    {

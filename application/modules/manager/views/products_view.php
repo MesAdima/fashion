@@ -83,22 +83,11 @@
                                     <!-- <li class="divider"></li> -->
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Content <i class="caret"></i>
-
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/tables'?>">Tables</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/news'?>">News</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/messages'?>">Messages</a>
-                                    </li>
-                                    
-                                </ul>
+                            <li>
+                                <a  href="<?php echo base_url(). 'manager/messages'?>">Messages</a>
+                            </li>
+                            <li>
+                                <a  href="<?php echo base_url(). 'manager/admin'?>">Admins</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Deactivations<i class="caret"></i>
@@ -106,14 +95,22 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dusers'?>">User List</a>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dtype'?>">Type List</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dcompa'?>">Companies List</a>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dcat'?>">Category List</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dmang'?>">Manager List</a>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dcomp'?>">Company List</a>
                                     </li>
+                                    <li>
+                                        <div class="divider"></div>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="<?php echo base_url(). 'manager/dadmin'?>">Admin List</a>
+                                    </li>
+                                </ul>
+                            </li>
                                 </ul>
                             </li>
                         </ul>
