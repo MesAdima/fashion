@@ -1,4 +1,4 @@
-<?php echo form_open(base_url().'cart/update'); ?>
+<?php echo form_open(base_url().'cart/remove'.$rowid); ?>
 
 <table cellpadding="6" cellspacing="1" style="width:100%" border="0">
 
@@ -20,7 +20,7 @@
 	  <td>
 		<?php echo $items['name']; ?>
 
-			<?php if ($this->cart->has_options($items['rowid']) == TRUE): ?>
+			<!-- <?php if ($this->cart->has_options($items['rowid']) == TRUE): ?>
 
 				<p>
 					<?php foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value): ?>
@@ -30,7 +30,7 @@
 					<?php endforeach; ?>
 				</p>
 
-			<?php endif; ?>
+			<?php endif; ?> -->
 
 	  </td>
 	  <td style="text-align:right"><?php echo $this->cart->format_number($items['price']); ?></td>

@@ -22,28 +22,32 @@ class Cart extends MY_Controller {
 		$this->load->model('product_model');
 		$product = $this->product_model->get($this->input->post('prod_id'));
 		
+		//echo "<pre>";print_r($product);echo "</pre>";exit;
+		
 		$insert = array(
-			'id' => $this->input->post('prod_id')
-			
+			'id' => $this->input->post('prod_id'),
+			'qty' => 1,
+			'price' => $product->price,
+			'name' => $product->prod_name,
 		);
 		
 		$this->cart->insert($insert);
 		
+		redirect('products/view');
 		
 		
 		
-		
-		$this->load->library('cart');
-		$data = array(
-					array(
-                       'id'      => '1',
-                       'qty'     => 1,
-                       'price'   => 39.95,
-                       'name'    => 'T-Shirt',
-                       'options' => array('Size' => 'Large', 'Color' => 'Red')
-                    )
-               );
-		$this->cart->insert($data);
+		// $this->load->library('cart');
+		// $data = array(
+					// array(
+                       // 'id'      => '1',
+                       // 'qty'     => 1,
+                       // 'price'   => 39.95,
+                       // 'name'    => 'T-Shirt',
+                       // 'options' => array('Size' => 'Large', 'Color' => 'Red')
+                    // )
+               // );
+		// $this->cart->insert($data);
 		echo "add() called";
 	}
 	
@@ -57,13 +61,14 @@ class Cart extends MY_Controller {
 		echo $this->cart->total();
 	}
 	
-	public function remove(){
+	public function remove($row_id){
 		$data = array(
-			'row_id' => 'f0405bb2ad392b066c464c3a13e1854a',
+			'row_id' => $row_id,
 			'qty' => '0',
 		);
 		$this->cart->update($data);
-		echo "remove() called";
+		redirect('products/view');
+		//echo "remove() called";
 	}
 	
 	public function destroy(){

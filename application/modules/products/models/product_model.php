@@ -27,6 +27,21 @@ class Product_model extends MY_Model {
     
     return $products;
   }
+	
+	public function get($prod_id){
+			
+		$query = $this->db->get_where('products', array('prod_id' => $prod_id));
+		
+		$result = $query->result_array();
+  // You should use $q->num_rows() to detect the number of returned rows
+  		if($query->num_rows() == 1) {
+   // Return the first row:
+   			return $result[0];
+  		}
+  		return $result;
+ }
+		
+
 
   public function get_all_companies()
   {
