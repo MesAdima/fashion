@@ -51,6 +51,43 @@ class MY_Controller extends MX_Controller
             return $path;
         }
     }
+	
+	public function add_products($prod_id){
+		
+		$product = $this->product_model->get($prod_id);
+		
+		//echo "<pre>";print_r($product);echo "</pre>";exit;
+		
+		$insert = array(
+			'id' => $prod_id,
+			'qty' => 1,
+			'price' => $product['price'],
+			'name' => $product['prod_name'],
+		);
+		
+		$this->cart->insert($insert);
+		
+		//echo "<pre>";print_r($insert);echo "</pre>";exit;
+		//$this->cart->show_cart();
+		//redirect('products/view');
+		
+		
+		
+		// $this->load->library('cart');
+		// $data = array(
+					// array(
+                       // 'id'      => '1',
+                       // 'qty'     => 1,
+                       // 'price'   => 39.95,
+                       // 'name'    => 'T-Shirt',
+                       // 'options' => array('Size' => 'Large', 'Color' => 'Red')
+                    // )
+               // );
+		// $this->cart->insert($data);
+		//echo "add() called";
+		redirect('shoppingcart/v_cart');
+		//$this->load->view('cart/v_cart'); 
+	}
 
 
 }

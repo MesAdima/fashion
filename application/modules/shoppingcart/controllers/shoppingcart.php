@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Cart extends MY_Controller {
+class Shoppingcart extends MY_Controller {
 	
 	function __construct()
     {
@@ -58,6 +58,8 @@ class Cart extends MY_Controller {
                // );
 		// $this->cart->insert($data);
 		//echo "add() called";
+		redirect('shoppingcart');
+		//$this->load->view('cart/v_cart'); 
 	}
 	
 	public function show_cart(){

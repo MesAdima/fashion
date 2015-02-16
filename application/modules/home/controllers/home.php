@@ -84,7 +84,7 @@ class Home extends MY_Controller {
 
 	 {
       if($this->session->userdata('logged_in')){
-			redirect('cart/add_products/'.$prod_id);
+			redirect('shoppingcart/add_products/'.$prod_id);
       }
       else{
         redirect('user/log');

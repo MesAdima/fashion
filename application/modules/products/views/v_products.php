@@ -273,40 +273,7 @@
                       } 
 						?>
 						
-							<?php if ($cart = $this->cart->contents()): ?>
-								<?php print_r($cart);exit; ?>
-						<div id = "cart">
-							<table>
-								<caption>
-									Shopping Cart
-								</caption>
-								<thead>
-									<tr>
-										<th>Product Name</th>
-										<th>Price</th>
-										<th></th>
-									</tr>
-								</thead>
-								<?php foreach ($cart as $item): ?>
-									<tr>
-										<td>
-											<?php echo $item['name']; ?>
-										</td>
-										<td>
-											Ksh<?php echo $item['subtotal']; ?>
-										</td>
-										<td class="remove"><?php echo anchor('cart/remove/'.$item['rowid'], 'X'); ?></td>
-									</tr>
-								 <?php endforeach; ?>
-								 	<tr class="total">
-								 		<td colspan="2"><strong>Total</strong></td>
-								 		<td>Ksh<?php echo $this->cart->total(); ?></td>
-								 	</tr>
-							</table>
-                      			
 							
-						</div>
-							<?php endif; ?>
 						<!-- <div id="pagination" class="span12 pagination">
 
 						<ul class="span12 pagination">
