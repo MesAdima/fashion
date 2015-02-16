@@ -34,12 +34,14 @@ class Cart extends MY_Controller {
 		$insert = array(
 			'id' => $prod_id,
 			'qty' => 1,
-			'price' => $product->price,
-			'name' => $product->prod_name,
+			'price' => $product['price'],
+			'name' => $product['prod_name'],
 		);
 		
 		$this->cart->insert($insert);
 		
+		//echo "<pre>";print_r($insert);echo "</pre>";exit;
+		//$this->cart->show_cart();
 		//redirect('products/view');
 		
 		
@@ -55,7 +57,7 @@ class Cart extends MY_Controller {
                     // )
                // );
 		// $this->cart->insert($data);
-		echo "add() called";
+		//echo "add() called";
 	}
 	
 	public function show_cart(){

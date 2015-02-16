@@ -38,8 +38,8 @@ class Product_model extends MY_Model {
    // Return the first row:
    			//return $result[0];
   		//}
-  		return $result;
-		var_dump($result);
+  		return $result[0];
+		
  }
 		
 
